@@ -1,19 +1,37 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import styles from "../../src/styles/styles.module.scss"
+import BackgroundImage from 'gatsby-background-image'
 
-const IndexPage = () => (
+const IndexPage = (props) => (
   <Layout>
     <SEO title="Home" />
-    <h1>Bienvenido a la APP de EDUK Diseño</h1>
-    <Link className={styles.link} to="/page-2/">Go to page 2</Link>
-    <Link className={styles.link} to="/using-typescript/">Go to "Using TypeScript"</Link>
-    <Link className={styles.link} to="/object/">Go to Object page</Link>
+    <BackgroundImage
+      className="masthead"
+      fluid={props.data.indexImage.childImageSharp.fluid}
+    >
+      <div className="black-overlay">
+        <div className="content-box">
+          <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
+          <h2>Seleccione una vitrina</h2>
+        </div>
+      </div>
+    </BackgroundImage>
   </Layout>
 )
 
 export default IndexPage
+export const pageQuery = graphql`
+  query {
+    indexImage: file(relativePath: { eq: "home.png"} ) {
+      childImageSharp {
+        fluid(maxWidth:100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
