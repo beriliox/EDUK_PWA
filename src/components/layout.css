@@ -620,3 +620,7 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+.gradient {
+  background-image: linear-gradient(rgba(0,0,0,50%), white, white);
+}

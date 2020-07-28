@@ -12,12 +12,10 @@ import Footer from "./footer";
 import "./layout.css"
 import "../styles/background-image.css"
 
-import styles from "../styles/styles.module.scss";
-
 const Layout = ({ children }) => {
 
   return (
-    <div className={styles.gradient}>
+    <div className="gradient">
       <main>{children}</main>
       <Footer/>
     </div>
