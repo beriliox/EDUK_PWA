@@ -23,12 +23,13 @@ export const query = graphql`
     }`
 
 const Object = (props) => {
-    let body = props.data.nodeObject.body ? props.data.nodeObject.body.value : ''
+    const body = props.data.nodeObject.body ? props.data.nodeObject.body.value : ''
+    const video = props.data.nodeObject.relationships.field_video.localFile.publicURL ? props.data.nodeObject.relationships.field_video.localFile.publicURL : '';
     return (
         <Layout>
             <h1>{props.data.nodeObject.title}</h1>
             <div dangerouslySetInnerHTML={{ __html: body}}></div>
-            <Video videoSrcURL={props.data.nodeObject.relationships.field_video.localFile.publicURL}/>
+            <Video videoSrcURL={video}/>
         </Layout>
     )
 }
