@@ -42,7 +42,7 @@ module.exports = {
      {
        resolve: `gatsby-source-drupal`,
        options: {
-         baseUrl: process.env.DRUPAL_URL,
+         baseUrl: `https://462eaf2582c9.ngrok.io/`,
          apiBase: `jsonapi`, // optional, defaults to `jsonapi`
          basicAuth: {
           username: process.env.BASIC_AUTH_USERNAME,
