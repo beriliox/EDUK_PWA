@@ -42,7 +42,7 @@ module.exports = {
      {
        resolve: `gatsby-source-drupal`,
        options: {
-         baseUrl: `http://eduk_diseno.lndo.site/`,
+         baseUrl: process.env.DRUPAL_URL,
          apiBase: `jsonapi`, // optional, defaults to `jsonapi`
          basicAuth: {
           username: process.env.BASIC_AUTH_USERNAME,
