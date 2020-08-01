@@ -1,37 +1,71 @@
-import React from 'react'
-import Layout  from "../components/layout";
-import Video  from "../components/video";
+import React from "react"
+import { graphql, useStaticQuery } from "gatsby"
+//import connect from "react-redux"
+import Layout from "../components/layout"
+import ObjectModal from "../components/objectmodal.js"
 
-import { graphql } from "gatsby"
-
-export const query = graphql`
+const ObjectComponent = () => {
+  const object = useStaticQuery(graphql`
     query($drupal_internal__nid: Int) {
-        nodeObject(drupal_internal__nid: { eq: $drupal_internal__nid }) {
+      nodeObject(drupal_internal__nid: { eq: $drupal_internal__nid }) {
         drupal_internal__nid
-            title
-            body {
-                value
-            }
-            relationships {
-                field_video {
-                    localFile {
-                        publicURL
-                    }
-                }
-            }
+        title
+        body {
+          value
         }
-    }`
-
-const Object = (props) => {
-    const body = props.data.nodeObject.body ? props.data.nodeObject.body.value : ''
-    const video = props.data.nodeObject.relationships.field_video.localFile.publicURL ? props.data.nodeObject.relationships.field_video.localFile.publicURL : '';
-    return (
-        <Layout>
-            <h1>{props.data.nodeObject.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: body}}></div>
-            <Video videoSrcURL={video}/>
-        </Layout>
-    )
+        field_cx
+        field_cy
+        field_cr
+        field_material
+        field_code
+        field_resource_type
+        relationships {
+          field_video {
+            localFile {
+              publicURL
+            }
+          }
+          field_image {
+            localFile {
+              publicURL
+            }
+          }
+        }
+        relationships {
+          field_showcase {
+            title
+            drupal_internal__nid
+            relationships {
+              field_showcase_image {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  return (
+    <Layout>
+      <ObjectModal props={object.nodeObject} />
+    </Layout>
+  )
 }
 
-export default Object
+/*const mapStateToProps = reducer => ({
+  object: state.object,
+})
+
+const mapDispatchToProps = dispatch => ({
+  functionDispatchName(obj) {
+    dispatch({
+      type: "ACTION_TYPE_NAME",
+      obj,
+    })
+  },
+})*/
+
+export default ObjectComponent
+//export default connect(mapStateToProps, mapDispatchToProps)(ObjectComponent)

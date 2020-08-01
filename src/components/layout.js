@@ -10,11 +10,13 @@ import PropTypes from "prop-types"
 
 import "../styles/layout.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import layoutStyles from "./layout.module.scss"
+
 
 const Layout = ({ children }) => {
 
   return (
-    <div className="gradient">
+    <div className={layoutStyles.gradient}>
       <main>{children}</main>
     </div>
   )

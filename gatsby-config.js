@@ -38,17 +38,17 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-     `gatsby-plugin-offline`,
-     {
-       resolve: `gatsby-source-drupal`,
-       options: {
-         baseUrl: `https://462eaf2582c9.ngrok.io/`,
-         apiBase: `jsonapi`, // optional, defaults to `jsonapi`
-         basicAuth: {
+    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: `http://eduk_diseno.lndo.site`,
+        apiBase: `jsonapi`, // optional, defaults to `jsonapi`
+        basicAuth: {
           username: process.env.BASIC_AUTH_USERNAME,
           password: process.env.BASIC_AUTH_PASSWORD,
         },
-      }
-     }
+      },
+    },
   ],
 }

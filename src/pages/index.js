@@ -4,11 +4,13 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import BackgroundImage from 'gatsby-background-image'
-import indexStyles from "./index.module.scss";
+import BackgroundImage from "gatsby-background-image"
+import indexStyles from "./index.module.scss"
 
-const IndexPage = () => { 
+//import { Provider } from "react-redux"
+//import store from "../store"
 
+const IndexPage = () => {
   const query = useStaticQuery(graphql`
     query {
       allNodeShowcase {
@@ -19,10 +21,19 @@ const IndexPage = () => {
           }
         }
       }
-      
-      indexImage: file(relativePath: { eq: "home.png"} ) {
+
+      allNodeObject {
+        edges {
+          node {
+            drupal_internal__nid
+            title
+          }
+        }
+      }
+
+      indexImage: file(relativePath: { eq: "home.png" }) {
         childImageSharp {
-          fluid(maxWidth:1800) {
+          fluid(maxWidth: 1800) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -31,31 +42,46 @@ const IndexPage = () => {
   `)
 
   return (
+    //<Provider store={store}>
     <Layout>
       <SEO title="Home" />
       <BackgroundImage
-            className="masthead"
-            fluid={query.indexImage.childImageSharp.fluid}
+        className={indexStyles.masthead}
+        fluid={query.indexImage.childImageSharp.fluid}
       >
-        <div className="black-overlay">
-          <div className="content-box">
+        <div className={indexStyles.blackOverlay}>
+          <div className={indexStyles.contentBox}>
             <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
-            <h2>Seleccione una vitrina</h2>
+            <h2 className={indexStyles.subtitlesH2}>Seleccione una vitrina</h2>
             <ol className={indexStyles.showcases}>
-              { query.allNodeShowcase.edges.map((edge) => {
-                    return (
-                        <li className={indexStyles.showcase}>
-                            <Link to={`/showcase/${edge.node.drupal_internal__nid}`}>
-                                <h2>{ edge.node.title }</h2>
-                            </Link>
-                        </li>
-                    )
-                }) }
+              {query.allNodeShowcase.edges.map(edge => {
+                return (
+                  <li className={indexStyles.showcase}>
+                    <Link to={`/showcase/${edge.node.drupal_internal__nid}`}>
+                      <h2>{edge.node.title}</h2>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ol>
+
+            <h2 className={indexStyles.subtitlesH2}>Selecciona un objeto</h2>
+            <ol className={indexStyles.showcases}>
+              {query.allNodeObject.edges.map(edge => {
+                return (
+                  <li className={indexStyles.showcase}>
+                    <Link to={`/object/${edge.node.drupal_internal__nid}`}>
+                      <h2>{edge.node.title}</h2>
+                    </Link>
+                  </li>
+                )
+              })}
             </ol>
           </div>
         </div>
       </BackgroundImage>
     </Layout>
+    //</Provider>
   )
 }
 
