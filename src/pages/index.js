@@ -54,9 +54,9 @@ const IndexPage = () => {
             <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
             <h2 className={indexStyles.subtitlesH2}>Seleccione una vitrina</h2>
             <ol className={indexStyles.showcases}>
-              {query.allNodeShowcase.edges.map(edge => {
+              {query.allNodeShowcase.edges.map((edge, key) => {
                 return (
-                  <li className={indexStyles.showcase}>
+                  <li className={indexStyles.showcase} key={key}>
                     <Link to={`/showcase/${edge.node.drupal_internal__nid}`}>
                       <h2>{edge.node.title}</h2>
                     </Link>
@@ -65,11 +65,11 @@ const IndexPage = () => {
               })}
             </ol>
 
-            <h2 className={indexStyles.subtitlesH2}>Selecciona un objeto</h2>
+            <h2 className={indexStyles.subtitlesH2}>Selecciona una cedula</h2>
             <ol className={indexStyles.showcases}>
-              {query.allNodeObject.edges.map(edge => {
+              {query.allNodeObject.edges.map((edge, key) => {
                 return (
-                  <li className={indexStyles.showcase}>
+                  <li className={indexStyles.showcase} key={key}>
                     <Link to={`/object/${edge.node.drupal_internal__nid}`}>
                       <h2>{edge.node.title}</h2>
                     </Link>
