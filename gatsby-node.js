@@ -35,29 +35,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const cedulaTemplate = path.resolve("./src/templates/cedula.js")
-  const resCedula = await graphql(`
-    query {
-      allNodeCedula {
-        edges {
-          node {
-            drupal_internal__nid
-          }
-        }
-      }
-    }
-  `)
-
-  resCedula.data.allNodeCedula.edges.forEach(edge => {
-    createPage({
-      component: cedulaTemplate,
-      path: `/cedula/${edge.node.drupal_internal__nid}`,
-      context: {
-        drupal_internal__nid: edge.node.drupal_internal__nid,
-      },
-    })
-  })
-
   const showcaseTemplate = path.resolve("./src/templates/showcase.js")
   const resShowcase = await graphql(`
     query {
