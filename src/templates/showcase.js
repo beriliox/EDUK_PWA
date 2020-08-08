@@ -12,12 +12,12 @@ const Showcase = props => {
 
   const handleClose = () => setShow(false)
 
-  const _showObject = (e, s) => {
+  const _showObject = (e, showcase) => {
     //let x = e.nativeEvent.offsetX
     //let y = e.nativeEvent.offsetY
-    s.objects.forEach(obj => {
+    showcase.objects.forEach(obj => {
       let objGntCode = "S02_V06_A" // definir campo obj.<CODE>
-      if (objGntCode === s.imageName) {
+      if (objGntCode === showcase.imageName) {
         /*let getObjectFromImage = document.getElementById(objGntCode)
         let objectX = getObjectFromImage.cx
         let objectY = getObjectFromImage.cy*/
