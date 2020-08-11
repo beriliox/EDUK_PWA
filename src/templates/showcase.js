@@ -56,14 +56,12 @@ const Showcase = props => {
                   src={field.localFile.publicURL}
                   fluid
                 />
-                <Carousel.Caption>
-                  <ObjectComponent props={modalObjectProps} />
-                </Carousel.Caption>
               </Carousel.Item>
             )
           }
         )}
       </Carousel>
+      <ObjectComponent props={modalObjectProps} />
     </Layout>
   )
 }
