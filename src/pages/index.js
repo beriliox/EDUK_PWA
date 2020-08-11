@@ -64,19 +64,6 @@ const IndexPage = () => {
                 )
               })}
             </ol>
-
-            <h2 className={indexStyles.subtitlesH2}>Selecciona una cedula</h2>
-            <ol className={indexStyles.showcases}>
-              {query.allNodeObject.edges.map((edge, key) => {
-                return (
-                  <li className={indexStyles.showcase} key={key}>
-                    <Link to={`/object/${edge.node.drupal_internal__nid}`}>
-                      <h2>{edge.node.title}</h2>
-                    </Link>
-                  </li>
-                )
-              })}
-            </ol>
           </div>
         </div>
       </BackgroundImage>
