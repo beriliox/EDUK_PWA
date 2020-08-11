@@ -30,6 +30,7 @@ const Showcase = props => {
     })
   }
 
+  const objects = props.data.nodeShowcase.relationships.node__object
   const modalObjectProps = {
     show,
     handleClose,
@@ -43,7 +44,6 @@ const Showcase = props => {
         {props.data.nodeShowcase.relationships.field_showcase_image.map(
           (field, key) => {
             const imageName = field.localFile.name
-            const objects = props.data.nodeShowcase.relationships.node__object
             const clickProps = {
               imageName,
               objects,
