@@ -13,7 +13,7 @@ import indexStyles from "./index.module.scss"
 const IndexPage = () => {
   const query = useStaticQuery(graphql`
     query {
-      allNodeShowcase {
+      allNodeVitrina {
         edges {
           node {
             drupal_internal__nid
@@ -22,16 +22,7 @@ const IndexPage = () => {
         }
       }
 
-      allNodeObject {
-        edges {
-          node {
-            drupal_internal__nid
-            title
-          }
-        }
-      }
-
-      indexImage: file(relativePath: { eq: "home.png" }) {
+      indexImage: file(relativePath: { eq: "home.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 1800) {
             ...GatsbyImageSharpFluid
@@ -49,23 +40,27 @@ const IndexPage = () => {
         className={indexStyles.masthead}
         fluid={query.indexImage.childImageSharp.fluid}
       >
-        <div className={indexStyles.blackOverlay}>
-          <div className={indexStyles.contentBox}>
-            <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
-            <h2 className={indexStyles.subtitlesH2}>Seleccione una vitrina</h2>
-            <ol className={indexStyles.showcases}>
-              {query.allNodeShowcase.edges.map((edge, key) => {
-                return (
-                  <li className={indexStyles.showcase} key={key}>
-                    <Link to={`/showcase/${edge.node.drupal_internal__nid}`}>
-                      <h2>{edge.node.title}</h2>
-                    </Link>
-                  </li>
-                )
-              })}
-            </ol>
+        {
+          <div className={indexStyles.blackOverlay}>
+            <div className={indexStyles.contentBox}>
+              <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
+              <h2 className={indexStyles.subtitlesH2}>
+                Seleccione una vitrina
+              </h2>
+              <ol className={indexStyles.vitrinas}>
+                {query.allNodeVitrina.edges.map((edge, key) => {
+                  return (
+                    <li className={indexStyles.vitrina} key={key}>
+                      <Link to={`/vitrina/${edge.node.drupal_internal__nid}`}>
+                        <h2>{edge.node.title}</h2>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ol>
+            </div>
           </div>
-        </div>
+        }
       </BackgroundImage>
     </Layout>
     //</Provider>

@@ -12,10 +12,10 @@ const path = require("path")
 module.exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const showcaseTemplate = path.resolve("./src/templates/showcase.js")
-  const resShowcase = await graphql(`
+  const vitrinaTemplate = path.resolve("./src/templates/vitrina.js")
+  const resVitrina = await graphql(`
     query {
-      allNodeShowcase {
+      allNodeVitrina {
         edges {
           node {
             drupal_internal__nid
@@ -25,10 +25,10 @@ module.exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  resShowcase.data.allNodeShowcase.edges.forEach(edge => {
+  resVitrina.data.allNodeVitrina.edges.forEach(edge => {
     createPage({
-      component: showcaseTemplate,
-      path: `/showcase/${edge.node.drupal_internal__nid}`,
+      component: vitrinaTemplate,
+      path: `/vitrina/${edge.node.drupal_internal__nid}`,
       context: {
         drupal_internal__nid: edge.node.drupal_internal__nid,
       },
