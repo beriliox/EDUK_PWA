@@ -4,7 +4,7 @@ import Video from "./video"
 
 const ObjectComponent = ({ props }) => {
   const defaultImage = props.object
-    ? props.object.relationships.field_image[0].localFile.publicURL
+    ? props.object.relationships.field_imagen[0].localFile.publicURL
     : ""
   const [showDefaultImage, setShowDefaultImage] = useState(true)
 
@@ -75,11 +75,11 @@ const ObjectComponent = ({ props }) => {
 
   const title = object ? object.title : ""
   const material = object ? object.field_material : ""
-  const site = object ? object.field_archeological_site : ""
-  const commune = object ? object.field_commune : ""
-  const province = object ? object.field_province : ""
-  const code = object ? object.field_code : ""
-  const objectImages = object ? object.relationships.field_image : []
+  const site = object ? object.field_sitio_arqueologico : ""
+  const commune = object ? object.field_comuna : ""
+  const province = object ? object.field_provincia : ""
+  const code = object ? object.field_codigo : ""
+  const objectImages = object ? object.relationships.field_imagen : []
   const video = object ? object.relationships.field_video : null
   const _3d = object ? object.relationships.field_3d : null
   return (
@@ -115,7 +115,7 @@ const ObjectComponent = ({ props }) => {
                   <Image
                     id={`imageObject-${key}`}
                     onClick={e =>
-                      _selectImage(e, object.relationships.field_image)
+                      _selectImage(e, object.relationships.field_imagen)
                     }
                     src={image.localFile.publicURL}
                   />
@@ -131,7 +131,7 @@ const ObjectComponent = ({ props }) => {
           <div>{`${commune}, ${province}`}</div>
           <div>{code}</div>
           <div>
-            <div onClick={() => _showCedula(object.relationships.field_image)}>
+            <div onClick={() => _showCedula(object.relationships.field_imagen)}>
               Cédula
             </div>
             {_3d ? (

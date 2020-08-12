@@ -1,7 +1,12 @@
 .masthead {
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.circle {
+  opacity: 0.2;
+  fill: yellow;
 }
