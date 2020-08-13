@@ -6,13 +6,16 @@ import ObjectComponent from "../components/object"
 import vitrinaStyles from "./vitrina.module.scss"
 
 const Vitrina = props => {
+  const [onSelect, setOnSelect] = useState(0)
   const [object, setObject] = useState(false)
 
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
 
-  const _showObject = obj => {
+  const _showObject = (obj, key) => {
+    console.log(key)
+    setOnSelect(key)
     setObject(obj)
     setShow(true)
     console.log(obj)
@@ -30,39 +33,43 @@ const Vitrina = props => {
     object,
   }
 
+  const vitrinas = props.data.nodeVitrina.relationships.node__imagenes_vitrina
+    ? props.data.nodeVitrina.relationships.node__imagenes_vitrina
+    : []
+
   return (
     <Layout key={Math.round(Math.random())}>
-      <Carousel key={Math.round(Math.random())}>
-        {props.data.nodeVitrina.relationships.node__imagenes_vitrina.map(
-          (vitrina, key) => {
-            return (
-              <Carousel.Item key={key}>
-                <div
-                  width="800"
-                  height="1280"
-                  onClick={e => _showCoords(e)}
-                  style={{
-                    backgroundImage: `url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL})`,
-                  }}
-                >
+      <Carousel key={Math.round(Math.random())} defaultActiveIndex={onSelect}>
+        {vitrinas.map((vitrina, key) => {
+          return (
+            <Carousel.Item key={key}>
+              <div
+                width="800"
+                height="1280"
+                onClick={e => _showCoords(e)}
+                style={{
+                  backgroundImage: `url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL})`,
+                }}
+              >
+                <svg width="800" height="1280">
                   {vitrina.relationships.node__objeto.map((obj, k) => {
+                    console.log(obj)
                     return (
-                      <svg key={k} width="800" height="1280">
-                        <circle
-                          onClick={() => _showObject(obj)}
-                          cx={obj.field_cx}
-                          cy={obj.field_cy}
-                          r={obj.field_cr}
-                          className={vitrinaStyles.circle}
-                        ></circle>
-                      </svg>
+                      <circle
+                        key={k}
+                        onClick={() => _showObject(obj, key)}
+                        cx={obj.field_cx}
+                        cy={obj.field_cy}
+                        r={obj.field_cr}
+                        className={vitrinaStyles.circle}
+                      ></circle>
                     )
                   })}
-                </div>
-              </Carousel.Item>
-            )
-          }
-        )}
+                </svg>
+              </div>
+            </Carousel.Item>
+          )
+        })}
       </Carousel>
       <ObjectComponent props={modalObjectProps} />
     </Layout>
