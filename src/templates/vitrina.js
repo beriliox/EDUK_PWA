@@ -37,6 +37,11 @@ const Vitrina = props => {
     ? props.data.nodeVitrina.relationships.node__imagenes_vitrina
     : []
 
+  const screenWidth = window.screen.width
+  const screenHeight = window.screen.height
+
+  console.log(screenWidth, screenHeight)
+
   return (
     <Layout key={Math.round(Math.random())}>
       <Carousel key={Math.round(Math.random())} defaultActiveIndex={onSelect}>
@@ -44,16 +49,15 @@ const Vitrina = props => {
           return (
             <Carousel.Item key={key}>
               <div
-                width="800"
-                height="1280"
+                width={screenWidth}
+                height={screenHeight}
                 onClick={e => _showCoords(e)}
                 style={{
                   backgroundImage: `url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL})`,
                 }}
               >
-                <svg width="800" height="1280">
+                <svg width={screenWidth} height={screenHeight}>
                   {vitrina.relationships.node__objeto.map((obj, k) => {
-                    console.log(obj)
                     return (
                       <circle
                         key={k}
