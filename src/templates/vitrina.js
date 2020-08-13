@@ -14,17 +14,17 @@ const Vitrina = props => {
   const handleClose = () => setShow(false)
 
   const _showObject = (obj, key) => {
-    console.log(key)
+    //console.log(key)
     setOnSelect(key)
     setObject(obj)
     setShow(true)
-    console.log(obj)
+    //console.log(obj)
   }
 
   const _showCoords = e => {
     let x = e.nativeEvent.offsetX
     let y = e.nativeEvent.offsetY
-    console.log(x, y)
+    //console.log(x, y)
   }
 
   const modalObjectProps = {
@@ -37,11 +37,6 @@ const Vitrina = props => {
     ? props.data.nodeVitrina.relationships.node__imagenes_vitrina
     : []
 
-  const screenWidth = window.screen.width
-  const screenHeight = window.screen.height
-
-  console.log(screenWidth, screenHeight)
-
   return (
     <Layout key={Math.round(Math.random())}>
       <Carousel key={Math.round(Math.random())} defaultActiveIndex={onSelect}>
@@ -49,14 +44,14 @@ const Vitrina = props => {
           return (
             <Carousel.Item key={key}>
               <div
-                width={screenWidth}
-                height={screenHeight}
+                width="800"
+                height="1280"
                 onClick={e => _showCoords(e)}
                 style={{
                   backgroundImage: `url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL})`,
                 }}
               >
-                <svg width={screenWidth} height={screenHeight}>
+                <svg width="800" height="1280">
                   {vitrina.relationships.node__objeto.map((obj, k) => {
                     return (
                       <circle

@@ -3,9 +3,12 @@ import { Image, Carousel, Modal } from "react-bootstrap"
 import Video from "./video"
 
 const ObjectComponent = ({ props }) => {
-  const defaultImage = props.object
-    ? props.object.relationships.field_imagen[0].localFile.publicURL
+  const objectImageProp = props.object
+    ? props.object.relationships.field_imagen[0].localFile
     : ""
+
+  const defaultImage = objectImageProp ? objectImageProp.publicURL : ""
+
   const [showDefaultImage, setShowDefaultImage] = useState(true)
 
   const [showImage, setShowImage] = useState(false)
@@ -110,17 +113,19 @@ const ObjectComponent = ({ props }) => {
         <Modal.Body>
           <Carousel>
             {objectImages.map((image, key) => {
-              return (
-                <Carousel.Item key={key}>
-                  <Image
-                    id={`imageObject-${key}`}
-                    onClick={e =>
-                      _selectImage(e, object.relationships.field_imagen)
-                    }
-                    src={image.localFile.publicURL}
-                  />
-                </Carousel.Item>
-              )
+              if (image.localFile) {
+                return (
+                  <Carousel.Item key={key}>
+                    <Image
+                      id={`imageObject-${key}`}
+                      onClick={e =>
+                        _selectImage(e, object.relationships.field_imagen)
+                      }
+                      src={image.localFile.publicURL}
+                    />
+                  </Carousel.Item>
+                )
+              }
             })}
           </Carousel>
         </Modal.Body>
