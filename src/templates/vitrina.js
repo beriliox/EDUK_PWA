@@ -39,7 +39,11 @@ const Vitrina = props => {
 
   return (
     <Layout key={Math.round(Math.random())}>
-      <Carousel key={Math.round(Math.random())} defaultActiveIndex={onSelect}>
+      <Carousel
+        key={Math.round(Math.random())}
+        defaultActiveIndex={onSelect}
+        interval={null}
+      >
         {vitrinas.map((vitrina, key) => {
           return (
             <Carousel.Item key={key}>

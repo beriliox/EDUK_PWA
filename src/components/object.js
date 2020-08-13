@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { Image, Carousel, Modal } from "react-bootstrap"
 import Video from "./video"
+import objectStyles from "./object.module.scss"
+import "./object.css"
 
 const ObjectComponent = ({ props }) => {
   const objectImageProp = props.object
@@ -10,6 +12,10 @@ const ObjectComponent = ({ props }) => {
   const defaultImage = objectImageProp ? objectImageProp.publicURL : ""
 
   const [showDefaultImage, setShowDefaultImage] = useState(true)
+
+  const [showSelectCedula, setShowSelectCedula] = useState("selected")
+  const [showSelectVideo, setShowSelectVideo] = useState("deselected")
+  const [showSelect3D, setShowSelect3D] = useState("deselected")
 
   const [showImage, setShowImage] = useState(false)
   const [objectImage, setObjectImage] = useState(false)
@@ -41,6 +47,9 @@ const ObjectComponent = ({ props }) => {
 
         setObjectImage(img)
         setShowImage(true)
+        setShowSelectVideo("deselected")
+        setShowSelect3D("deselected")
+        setShowSelectCedula("selected")
       }
     })
   }
@@ -56,23 +65,31 @@ const ObjectComponent = ({ props }) => {
     setShowImage(false)
 
     setShowDefaultImage(true)
+    setShowSelectVideo("deselected")
+    setShowSelect3D("deselected")
+    setShowSelectCedula("selected")
   }
 
   const _selectVideo = (res, type) => {
     setShowImage(false)
     setObjectImage(false)
     setShowDefaultImage(false)
+    setShowSelectCedula("deselected")
     if (type === "video") {
       setObject3D(false)
       setShow3D(false)
       setObjectVideo(res)
       setShowVideo(true)
+      setShowSelect3D("deselected")
+      setShowSelectVideo("selected")
     }
     if (type === "3d") {
       setObjectVideo(false)
       setShowVideo(false)
       setObject3D(res)
       setShow3D(true)
+      setShowSelectVideo("deselected")
+      setShowSelect3D("selected")
     }
   }
 
@@ -88,75 +105,85 @@ const ObjectComponent = ({ props }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={objectStyles.modalHeader}>
           {showVideo ? (
-            <div id="objectVideo">
+            <div id="objectVideo" className={objectStyles.Video}>
               <Video videoSrcURL={selectedVideo} />
             </div>
           ) : null}
           {show3D ? (
-            <div id="object3D">
-              <Video videoSrcURL={selected3D} />
+            <div id="object3D" className={objectStyles.Video}>
+              <Video style={"holi: holi;"} videoSrcURL={selected3D} />
             </div>
           ) : null}
           {showDefaultImage ? (
             <div id="defaultImage">
-              <Image src={defaultImage} />
+              <Image className={objectStyles.Image} src={defaultImage} />
             </div>
           ) : null}
           {showImage ? (
             <div id="objectImage">
-              <Image src={selectedImage} />
+              <Image className={objectStyles.Image} src={selectedImage} />
             </div>
           ) : null}
         </Modal.Header>
-        <Modal.Body>
-          <Carousel>
+        <Modal.Body className={objectStyles.modalBody}>
+          <div className={objectStyles.modalImagesBlock}>
             {objectImages.map((image, key) => {
               if (image.localFile) {
                 return (
-                  <Carousel.Item key={key}>
-                    <Image
-                      id={`imageObject-${key}`}
-                      onClick={e =>
-                        _selectImage(e, object.relationships.field_imagen)
-                      }
-                      src={image.localFile.publicURL}
-                    />
-                  </Carousel.Item>
+                  <Image
+                    id={`imageObject-${key}`}
+                    onClick={e =>
+                      _selectImage(e, object.relationships.field_imagen)
+                    }
+                    src={image.localFile.publicURL}
+                    className={objectStyles.imageCarousel}
+                  />
                 )
               }
             })}
-          </Carousel>
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <div>{title}</div>
-          <div>{material}</div>
-          <div>{site}</div>
-          <div>{`${commune}, ${province}`}</div>
-          <div>{code}</div>
-          <div>
-            <div onClick={() => _showCedula(object.relationships.field_imagen)}>
-              Cédula
+        <Modal.Footer className={objectStyles.modalContentFooter}>
+          <div className={objectStyles.objectInfoBlock}>
+            <div className={objectStyles.objectInfo}>
+              <p className={objectStyles.objectTitle}>{title}</p>
+              <p>{material}</p>
+              <p>{site}</p>
+              <p>{`${commune}, ${province}`}</p>
+              <p>{code}</p>
             </div>
-            {_3d ? (
-              <div
-                onClick={() =>
-                  _selectVideo(object.relationships.field_3d, "3d")
-                }
+          </div>
+          <div className={objectStyles.objectInfoBlock}>
+            <div className={objectStyles.objectInfoResources}>
+              <p
+                onClick={() => _showCedula(object.relationships.field_imagen)}
+                className={showSelectCedula}
               >
-                3D
-              </div>
-            ) : null}
-            {video ? (
-              <div
-                onClick={() =>
-                  _selectVideo(object.relationships.field_video, "video")
-                }
-              >
-                Video
-              </div>
-            ) : null}
+                Cédula
+              </p>
+              {_3d ? (
+                <p
+                  className={showSelect3D}
+                  onClick={() =>
+                    _selectVideo(object.relationships.field_3d, "3d")
+                  }
+                >
+                  3D
+                </p>
+              ) : null}
+              {video ? (
+                <p
+                  className={showSelectVideo}
+                  onClick={() =>
+                    _selectVideo(object.relationships.field_video, "video")
+                  }
+                >
+                  Video
+                </p>
+              ) : null}
+            </div>
           </div>
         </Modal.Footer>
       </Modal>

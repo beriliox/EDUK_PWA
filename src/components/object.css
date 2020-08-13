@@ -1,0 +1,13 @@
+.selected {
+  color: #eb5b28 !important;
+}
+
+.deselected {
+  color: white !important;
+}
+
+.modal-content .close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
