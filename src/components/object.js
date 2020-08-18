@@ -113,7 +113,7 @@ const ObjectComponent = ({ props }) => {
           ) : null}
           {show3D ? (
             <div id="object3D" className={objectStyles.Video}>
-              <Video style={"holi: holi;"} videoSrcURL={selected3D} />
+              <Video videoSrcURL={selected3D} />
             </div>
           ) : null}
           {showDefaultImage ? (
