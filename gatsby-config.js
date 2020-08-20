@@ -26,7 +26,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#AB7657`,
         theme_color: `#AB7657`,
-        display: `standalone`,
+        display: `fullscreen`,
         icon: `src/images/eduk_logo.png`, // This path is relative to the root of the site.
         icon_options: {
           // For all the options available, please see:
