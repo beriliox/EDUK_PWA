@@ -6,10 +6,9 @@ import ObjectComponent from "../components/object"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
 const Vitrina = props => {
+  const [showHelp, setShowHelp] = useState(true)
 
-  const [showHelp, setShowHelp] = useState(true);
-
-  const handleCloseHelp = () => setShowHelp(false);
+  const handleCloseHelp = () => setShowHelp(false)
 
   const [onSelect, setOnSelect] = useState(0)
   const [object, setObject] = useState(false)
@@ -79,9 +78,15 @@ const Vitrina = props => {
                 </svg>
               </div>
               <Carousel.Caption className={vitrinaStyles.Modal}>
-                <Modal show={showHelp} onHide={handleCloseHelp} dialogClassName={vitrinaStyles.modalHelpDialog} backdrop="static" keyboard={false}>
+                <Modal
+                  show={showHelp}
+                  onHide={handleCloseHelp}
+                  dialogClassName={vitrinaStyles.modalHelpDialog}
+                >
                   <Modal.Header className={vitrinaStyles.Help} closeButton>
-                    <Modal.Title>Recorre la vitrina y seleccione objetos</Modal.Title>
+                    <Modal.Title>
+                      Recorre la vitrina y seleccione objetos
+                    </Modal.Title>
                   </Modal.Header>
                 </Modal>
               </Carousel.Caption>
