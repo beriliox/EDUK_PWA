@@ -1,11 +1,16 @@
 import React, { useState } from "react"
 import Layout from "../components/layout"
-import { Carousel } from "react-bootstrap"
+import { Carousel, Modal } from "react-bootstrap"
 import { graphql } from "gatsby"
 import ObjectComponent from "../components/object"
 import vitrinaStyles from "./vitrina.module.scss"
-
+import "./vitrina.css"
 const Vitrina = props => {
+
+  const [showHelp, setShowHelp] = useState(true);
+
+  const handleCloseHelp = () => setShowHelp(false);
+
   const [onSelect, setOnSelect] = useState(0)
   const [object, setObject] = useState(false)
 
@@ -73,6 +78,13 @@ const Vitrina = props => {
                   })}
                 </svg>
               </div>
+              <Carousel.Caption className={vitrinaStyles.Modal}>
+                <Modal show={showHelp} onHide={handleCloseHelp} dialogClassName={vitrinaStyles.modalHelpDialog}>
+                  <Modal.Header className={vitrinaStyles.Help} closeButton>
+                    <Modal.Title>Recorre la vitrina y seleccione objetos</Modal.Title>
+                  </Modal.Header>
+                </Modal>
+              </Carousel.Caption>
             </Carousel.Item>
           )
         })}

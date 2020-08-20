@@ -163,7 +163,7 @@ const ObjectComponent = ({ props }) => {
             </div>
           ) : null}
           {showDefaultImage ? (
-            <div id="defaultImage">
+            <div id="defaultImage" className={objectStyles.defaultImage}>
               <Image className={objectStyles.Image} src={defaultImage} />
             </div>
           ) : null}

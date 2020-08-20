@@ -1,0 +1,9 @@
+.modal-content {
+    border: 0;
+}
+
+div[class*="modalHelpDialog"] .modal-content .close{
+    right: .5rem;
+    top: 0;
+    color: white;
+}
