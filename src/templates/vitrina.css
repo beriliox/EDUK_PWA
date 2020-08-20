@@ -11,7 +11,6 @@ div[class*="modalHelpDialog"] .modal-content .close{
 .carousel-control-prev {
     height: 70px;
     width: 60px;
-    padding: 0px 1rem 0 0rem;
     background-color: black;
     opacity: .7 !important;
     border-radius: 0 30px 30px 0;
@@ -21,10 +20,21 @@ div[class*="modalHelpDialog"] .modal-content .close{
 .carousel-control-next {
     height: 70px;
     width: 60px;
-    padding: 0px 1rem 0 0rem;
+    padding: 0px .5rem 0 0rem;
     background-color: black;
     opacity: .7 !important;
     border-radius: 30px 0 0 30px;
     top: 640px;
+}
+
+.carousel-indicators {
+    top: 0;
+}
+.carousel-indicators li {
+    margin: 1rem .5rem;
+    border-radius: 50%;
+    width: 22px;
+    height: 2px;
+    background-clip: unset;
 }
 
