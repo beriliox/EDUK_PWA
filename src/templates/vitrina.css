@@ -29,6 +29,8 @@ div[class*="modalHelpDialog"] .modal-content .close{
 
 .carousel-indicators {
     top: 0;
+    height: 50px;
+
 }
 .carousel-indicators li {
     margin: 1rem .5rem;
