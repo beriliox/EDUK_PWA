@@ -24,7 +24,7 @@ const Vitrina = props => {
   const _showCoords = e => {
     let x = e.nativeEvent.offsetX
     let y = e.nativeEvent.offsetY
-    //console.log(x, y)
+    console.log(x, y)
   }
 
   const modalObjectProps = {
@@ -74,7 +74,7 @@ const Vitrina = props => {
           )
         })}
       </Carousel>
-      <ObjectComponent props={modalObjectProps} />
+      <ObjectComponent key={parseInt(Math.random())} props={modalObjectProps} />
     </Layout>
   )
 }

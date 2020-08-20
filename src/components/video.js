@@ -5,6 +5,7 @@ const Video = ({ videoSrcURL }) => (
   <div className={videoStyles.videoModal}>
     <iframe
       src={videoSrcURL}
+      title="Default title"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       frameBorder="0"
       webkitallowfullscreen="true"

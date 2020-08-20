@@ -1,10 +1,12 @@
 import React, { useState } from "react"
-import { Image, Carousel, Modal } from "react-bootstrap"
+import { Image, Modal } from "react-bootstrap"
 import Video from "./video"
 import objectStyles from "./object.module.scss"
 import "./object.css"
 
 const ObjectComponent = ({ props }) => {
+
+  console.log(props);
   const objectImageProp = props.object
     ? props.object.relationships.field_imagen[0].localFile
     : ""
@@ -16,6 +18,9 @@ const ObjectComponent = ({ props }) => {
   const [showSelectCedula, setShowSelectCedula] = useState("selected")
   const [showSelectVideo, setShowSelectVideo] = useState("deselected")
   const [showSelect3D, setShowSelect3D] = useState("deselected")
+  const [showSelectMasInfo, setShowSelectMasInfo] = useState("deselected")
+
+  const [showBody, setShowBody] = useState(true)
 
   const [showImage, setShowImage] = useState(false)
   const [objectImage, setObjectImage] = useState(false)
@@ -28,6 +33,10 @@ const ObjectComponent = ({ props }) => {
   const [show3D, setShow3D] = useState(false)
   const [object3D, setObject3D] = useState(false)
   const selected3D = object3D ? object3D.localFile.publicURL : ""
+
+  const [showMasInfo, setShowMasInfo] = useState(false)
+  const [objectMasInfo, setObjectMasInfo] = useState(false)
+  const selectedMasInfo = objectMasInfo ? objectMasInfo : ""
 
   const show = props.show
   const handleClose = props.handleClose
@@ -45,10 +54,16 @@ const ObjectComponent = ({ props }) => {
         setObjectVideo(false)
         setShowVideo(false)
 
+        setObjectMasInfo(false)
+        setShowMasInfo(false)
+
         setObjectImage(img)
         setShowImage(true)
+        
+        setShowBody(true)
         setShowSelectVideo("deselected")
         setShowSelect3D("deselected")
+        setShowSelectMasInfo("deselected")
         setShowSelectCedula("selected")
       }
     })
@@ -61,20 +76,50 @@ const ObjectComponent = ({ props }) => {
     setObject3D(false)
     setShow3D(false)
 
+    setObjectMasInfo(false)
+    setShowMasInfo(false)
+
     setObjectImage(false)
     setShowImage(false)
 
     setShowDefaultImage(true)
+    setShowBody(true)
     setShowSelectVideo("deselected")
     setShowSelect3D("deselected")
+    setShowSelectMasInfo("deselected")
     setShowSelectCedula("selected")
+  }
+
+  const _showMasInfo = (masInfo) => {
+    setShowImage(false)
+    setObjectImage(false)
+
+    setObject3D(false)
+    setShow3D(false)
+
+    setObjectVideo(false)
+    setShowVideo(false)
+
+    setObjectMasInfo(masInfo)
+    setShowMasInfo(true)
+
+    setShowDefaultImage(false)
+    setShowBody(false)
+    setShowSelectCedula("deselected")
+    setShowSelect3D("deselected")
+    setShowSelectVideo("deselected")
+    setShowSelectMasInfo("selected")
   }
 
   const _selectVideo = (res, type) => {
     setShowImage(false)
     setObjectImage(false)
+    setObjectMasInfo(false)
+    setShowMasInfo(false)
     setShowDefaultImage(false)
+    setShowBody(false)
     setShowSelectCedula("deselected")
+    setShowSelectMasInfo("deselected")
     if (type === "video") {
       setObject3D(false)
       setShow3D(false)
@@ -99,6 +144,7 @@ const ObjectComponent = ({ props }) => {
   const commune = object ? object.field_comuna : ""
   const province = object ? object.field_provincia : ""
   const code = object ? object.field_codigo : ""
+  const masInfo = object ? object.body : ""
   const objectImages = object ? object.relationships.field_imagen : []
   const video = object ? object.relationships.field_video : null
   const _3d = object ? object.relationships.field_3d : null
@@ -126,25 +172,31 @@ const ObjectComponent = ({ props }) => {
               <Image className={objectStyles.Image} src={selectedImage} />
             </div>
           ) : null}
+          {showMasInfo ? (
+            <div className={objectStyles.MasInfo} dangerouslySetInnerHTML={{ __html: selectedMasInfo}}>
+            </div>
+          ) : null}
         </Modal.Header>
-        <Modal.Body className={objectStyles.modalBody}>
-          <div className={objectStyles.modalImagesBlock}>
-            {objectImages.map((image, key) => {
-              if (image.localFile) {
-                return (
-                  <Image
-                    id={`imageObject-${key}`}
-                    onClick={e =>
-                      _selectImage(e, object.relationships.field_imagen)
-                    }
-                    src={image.localFile.publicURL}
-                    className={objectStyles.imageCarousel}
-                  />
-                )
-              }
-            })}
-          </div>
-        </Modal.Body>
+        {showBody ? (
+          <Modal.Body className={objectStyles.modalBody}>
+            <div className={objectStyles.modalImagesBlock}>
+              {objectImages.map((image, key) => {
+                if (image.localFile) {
+                  return (
+                    <Image
+                      id={`imageObject-${key}`}
+                      onClick={e =>
+                        _selectImage(e, object.relationships.field_imagen)
+                      }
+                      src={image.localFile.publicURL}
+                      className={objectStyles.imageCarousel}
+                    />
+                  )
+                }
+              })}
+            </div>
+          </Modal.Body>
+        ) : null}
         <Modal.Footer className={objectStyles.modalContentFooter}>
           <div className={objectStyles.objectInfoBlock}>
             <div className={objectStyles.objectInfo}>
@@ -181,6 +233,16 @@ const ObjectComponent = ({ props }) => {
                   }
                 >
                   Video
+                </p>
+              ) : null}
+              {masInfo ? (
+                <p
+                  className={showSelectMasInfo}
+                  onClick={() =>
+                    _showMasInfo(masInfo.value)
+                  }
+                >
+                  Más información
                 </p>
               ) : null}
             </div>
