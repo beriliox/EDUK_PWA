@@ -52,7 +52,10 @@ const Vitrina = props => {
                 height="1280"
                 onClick={e => _showCoords(e)}
                 style={{
-                  backgroundImage: `url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL})`,
+                  backgroundImage: `
+                    url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL}),
+                    linear-gradient(rgba(0,0,0,50%), white, white)
+                  `,
                 }}
               >
                 <svg width="800" height="1280">
@@ -74,7 +77,7 @@ const Vitrina = props => {
           )
         })}
       </Carousel>
-      <ObjectComponent key={parseInt(Math.random())} props={modalObjectProps} />
+      <ObjectComponent props={modalObjectProps} />
     </Layout>
   )
 }
