@@ -2,10 +2,18 @@
     border: 0;
 }
 
+div[class*="modalHelpDialog"] .modal-content {
+    border: 1px solid #2A2E31;
+}
+
 div[class*="modalHelpDialog"] .modal-content .close{
     right: .5rem;
     top: 0;
     color: white;
+}
+
+div[class*="modalHelpDialog"] .modal-content .modal-title{
+    padding: 1rem 0;
 }
 
 .carousel-control-prev {

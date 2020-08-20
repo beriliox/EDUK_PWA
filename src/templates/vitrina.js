@@ -79,7 +79,7 @@ const Vitrina = props => {
                 </svg>
               </div>
               <Carousel.Caption className={vitrinaStyles.Modal}>
-                <Modal show={showHelp} onHide={handleCloseHelp} dialogClassName={vitrinaStyles.modalHelpDialog}>
+                <Modal show={showHelp} onHide={handleCloseHelp} dialogClassName={vitrinaStyles.modalHelpDialog} backdrop="static" keyboard={false}>
                   <Modal.Header className={vitrinaStyles.Help} closeButton>
                     <Modal.Title>Recorre la vitrina y seleccione objetos</Modal.Title>
                   </Modal.Header>
