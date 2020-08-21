@@ -3,16 +3,10 @@ import videoStyles from "./video.module.scss"
 
 const Video = ({ videoSrcURL }) => (
   <div className={videoStyles.videoModal}>
-    <iframe
-      src={videoSrcURL}
-      title="Default title"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      frameBorder="0"
-      webkitallowfullscreen="true"
-      mozallowfullscreen="true"
-      width="100%"
-      height="440"
-    />
+    <video width="100%" height="390" loop="true" autoPlay="true">
+      <source src={videoSrcURL} type="video/mp4" />
+      Sorry, your browser doesn't support embedded videos.
+    </video>
   </div>
 )
 export default Video
