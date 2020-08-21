@@ -5,8 +5,7 @@ import objectStyles from "./object.module.scss"
 import "./object.css"
 
 const ObjectComponent = ({ props }) => {
-
-  console.log(props);
+  console.log(props)
   const objectImageProp = props.object
     ? props.object.relationships.field_imagen[0].localFile
     : ""
@@ -59,7 +58,7 @@ const ObjectComponent = ({ props }) => {
 
         setObjectImage(img)
         setShowImage(true)
-        
+
         setShowBody(true)
         setShowSelectVideo("deselected")
         setShowSelect3D("deselected")
@@ -90,7 +89,7 @@ const ObjectComponent = ({ props }) => {
     setShowSelectCedula("selected")
   }
 
-  const _showMasInfo = (masInfo) => {
+  const _showMasInfo = masInfo => {
     setShowImage(false)
     setObjectImage(false)
 
@@ -150,7 +149,11 @@ const ObjectComponent = ({ props }) => {
   const _3d = object ? object.relationships.field_3d : null
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        dialogClassName={objectStyles.modalObjectDialog}
+      >
         <Modal.Header closeButton className={objectStyles.modalHeader}>
           {showVideo ? (
             <div id="objectVideo" className={objectStyles.Video}>
@@ -173,8 +176,10 @@ const ObjectComponent = ({ props }) => {
             </div>
           ) : null}
           {showMasInfo ? (
-            <div className={objectStyles.MasInfo} dangerouslySetInnerHTML={{ __html: selectedMasInfo}}>
-            </div>
+            <div
+              className={objectStyles.MasInfo}
+              dangerouslySetInnerHTML={{ __html: selectedMasInfo }}
+            ></div>
           ) : null}
         </Modal.Header>
         {showBody ? (
@@ -238,9 +243,7 @@ const ObjectComponent = ({ props }) => {
               {masInfo ? (
                 <p
                   className={showSelectMasInfo}
-                  onClick={() =>
-                    _showMasInfo(masInfo.value)
-                  }
+                  onClick={() => _showMasInfo(masInfo.value)}
                 >
                   Más información
                 </p>
