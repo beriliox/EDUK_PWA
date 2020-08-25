@@ -132,9 +132,6 @@ export const query = graphql`
               field_sitio_arqueologico
               field_comuna
               field_provincia
-              field_cx
-              field_cy
-              field_cr
               field_coords
               relationships {
                 field_video {
