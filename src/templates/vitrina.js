@@ -63,17 +63,24 @@ const Vitrina = props => {
                 }}
               >
                 <svg width="800" height="1280">
-                  {vitrina.relationships.node__objeto.map((obj, k) => {
-                    return (
-                      <circle
-                        key={k}
-                        onClick={() => _showObject(obj, key)}
-                        cx={obj.field_cx}
-                        cy={obj.field_cy}
-                        r={obj.field_cr}
-                        className={vitrinaStyles.circle}
-                      ></circle>
-                    )
+                  {vitrina.relationships.node__objeto.map(obj => {
+                    return obj.field_coords.map((coord, k) => {
+                      let cx = parseInt(coord.split(",")[0])
+                      let cy = parseInt(coord.split(",")[1])
+                      let cr = parseInt(coord.split(",")[2])
+                        ? parseInt(coord.split(",")[2])
+                        : 10
+                      return (
+                        <circle
+                          key={k}
+                          onClick={() => _showObject(obj, key)}
+                          cx={cx}
+                          cy={cy}
+                          r={cr}
+                          className={vitrinaStyles.circle}
+                        ></circle>
+                      )
+                    })
                   })}
                 </svg>
               </div>
@@ -128,6 +135,7 @@ export const query = graphql`
               field_cx
               field_cy
               field_cr
+              field_coords
               relationships {
                 field_video {
                   localFile {
