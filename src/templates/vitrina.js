@@ -1,14 +1,15 @@
 import React, { useState } from "react"
-import Layout from "../components/layout"
-import { Carousel, Modal } from "react-bootstrap"
+import { connect } from "react-redux"
 import { graphql } from "gatsby"
+import { Carousel, Modal } from "react-bootstrap"
+import Layout from "../components/layout"
 import ObjectComponent from "../components/object"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
-const Vitrina = props => {
-  const [showHelp, setShowHelp] = useState(true)
+const Vitrina = (props, { showHelp, handleCloseHelp }) => {
+  //const [showHelp, setShowHelp] = useState(true)
 
-  const handleCloseHelp = () => setShowHelp(false)
+  //const handleCloseHelp = () => setShowHelp(false)
 
   const [onSelect, setOnSelect] = useState(0)
   const [object, setObject] = useState(false)
@@ -106,7 +107,21 @@ const Vitrina = props => {
   )
 }
 
-export default Vitrina
+const mapStateToProps = state => ({
+  showHelp: state.showHelp,
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleCloseHelp: () => {
+      dispatch({
+        type: "CLOSE_MODAL",
+      })
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Vitrina)
 export const query = graphql`
   query($drupal_internal__nid: Int) {
     nodeVitrina(drupal_internal__nid: { eq: $drupal_internal__nid }) {
