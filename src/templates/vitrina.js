@@ -1,15 +1,66 @@
 import React, { useState } from "react"
-import { connect } from "react-redux"
-import { graphql } from "gatsby"
-import { Carousel, Modal } from "react-bootstrap"
 import Layout from "../components/layout"
+import { Carousel, Modal } from "react-bootstrap"
+import { useStaticQuery, graphql } from "gatsby"
 import ObjectComponent from "../components/object"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
-const Vitrina = (props, { showHelp, handleCloseHelp }) => {
-  //const [showHelp, setShowHelp] = useState(true)
 
-  //const handleCloseHelp = () => setShowHelp(false)
+import { connect } from "react-redux"
+
+const Vitrina = ({ showHelp, toggleShowHelp }) => {
+  const query = useStaticQuery(
+    graphql`
+      query($drupal_internal__nid: Int) {
+        nodeVitrina(drupal_internal__nid: { eq: $drupal_internal__nid }) {
+          drupal_internal__nid
+          title
+          relationships {
+            node__imagenes_vitrina {
+              title
+              relationships {
+                field_imagen_vitrina {
+                  localFile {
+                    publicURL
+                  }
+                }
+                node__objeto {
+                  drupal_internal__nid
+                  title
+                  body {
+                    value
+                  }
+                  field_material
+                  field_codigo
+                  field_sitio_arqueologico
+                  field_comuna
+                  field_provincia
+                  field_coords
+                  relationships {
+                    field_video {
+                      localFile {
+                        publicURL
+                      }
+                    }
+                    field_3d {
+                      localFile {
+                        publicURL
+                      }
+                    }
+                    field_imagen {
+                      localFile {
+                        publicURL
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  )
 
   const [onSelect, setOnSelect] = useState(0)
   const [object, setObject] = useState(false)
@@ -38,8 +89,8 @@ const Vitrina = (props, { showHelp, handleCloseHelp }) => {
     object,
   }
 
-  const vitrinas = props.data.nodeVitrina.relationships.node__imagenes_vitrina
-    ? props.data.nodeVitrina.relationships.node__imagenes_vitrina
+  const vitrinas = query.nodeVitrina.relationships.node__imagenes_vitrina
+    ? query.nodeVitrina.relationships.node__imagenes_vitrina
     : []
 
   return (
@@ -88,7 +139,7 @@ const Vitrina = (props, { showHelp, handleCloseHelp }) => {
               <Carousel.Caption className={vitrinaStyles.Modal}>
                 <Modal
                   show={showHelp}
-                  onHide={handleCloseHelp}
+                  onHide={() => toggleShowHelp(showHelp)}
                   dialogClassName={vitrinaStyles.modalHelpDialog}
                 >
                   <Modal.Header className={vitrinaStyles.Help} closeButton>
@@ -108,67 +159,16 @@ const Vitrina = (props, { showHelp, handleCloseHelp }) => {
 }
 
 const mapStateToProps = state => ({
-  showHelp: state.showHelp,
+  showHelp: state.app.showHelp,
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleCloseHelp: () => {
-      dispatch({
-        type: "CLOSE_MODAL",
-      })
-    },
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  toggleShowHelp(showHelp) {
+    dispatch({
+      type: "TOGGLE_SHOWHELP",
+      showHelp,
+    })
+  },
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vitrina)
-export const query = graphql`
-  query($drupal_internal__nid: Int) {
-    nodeVitrina(drupal_internal__nid: { eq: $drupal_internal__nid }) {
-      drupal_internal__nid
-      title
-      relationships {
-        node__imagenes_vitrina {
-          title
-          relationships {
-            field_imagen_vitrina {
-              localFile {
-                publicURL
-              }
-            }
-            node__objeto {
-              drupal_internal__nid
-              title
-              body {
-                value
-              }
-              field_material
-              field_codigo
-              field_sitio_arqueologico
-              field_comuna
-              field_provincia
-              field_coords
-              relationships {
-                field_video {
-                  localFile {
-                    publicURL
-                  }
-                }
-                field_3d {
-                  localFile {
-                    publicURL
-                  }
-                }
-                field_imagen {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
