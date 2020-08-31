@@ -1,14 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import Layout from "../components/layout"
-import { Carousel, Modal } from "react-bootstrap"
-import { useStaticQuery, graphql } from "gatsby"
-import ObjectComponent from "../components/object"
-import vitrinaStyles from "./vitrina.module.scss"
-import "./vitrina.css"
-
 import { connect } from "react-redux"
+import { useStaticQuery, graphql } from "gatsby"
+import ObjectComponent from "../components/object/object"
+import VitrinaCarousel from "../components/vitrina/vitrinacarousel"
 
-const Vitrina = ({ showHelp, toggleShowHelp }) => {
+const Vitrina = ({ object }) => {
   const query = useStaticQuery(
     graphql`
       query($drupal_internal__nid: Int) {
@@ -62,113 +59,20 @@ const Vitrina = ({ showHelp, toggleShowHelp }) => {
     `
   )
 
-  const [onSelect, setOnSelect] = useState(0)
-  const [object, setObject] = useState(false)
-
-  const [show, setShow] = useState(false)
-
-  const handleClose = () => setShow(false)
-
-  const _showObject = (obj, key) => {
-    //console.log(key)
-    setOnSelect(key)
-    setObject(obj)
-    setShow(true)
-    //console.log(obj)
-  }
-
-  const _showCoords = e => {
-    let x = e.nativeEvent.offsetX
-    let y = e.nativeEvent.offsetY
-    console.log(x, y)
-  }
-
-  const modalObjectProps = {
-    show,
-    handleClose,
-    object,
-  }
-
   const vitrinas = query.nodeVitrina.relationships.node__imagenes_vitrina
     ? query.nodeVitrina.relationships.node__imagenes_vitrina
     : []
 
   return (
     <Layout key={Math.round(Math.random())}>
-      <Carousel
-        key={Math.round(Math.random())}
-        defaultActiveIndex={onSelect}
-        interval={null}
-      >
-        {vitrinas.map((vitrina, key) => {
-          return (
-            <Carousel.Item key={key}>
-              <div
-                width="800"
-                height="1280"
-                onClick={e => _showCoords(e)}
-                style={{
-                  backgroundImage: `
-                    url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL}),
-                    linear-gradient(rgba(0,0,0,50%), white, white)
-                  `,
-                }}
-              >
-                <svg width="800" height="1280">
-                  {vitrina.relationships.node__objeto.map(obj => {
-                    return obj.field_coords.map((coord, k) => {
-                      let cx = parseInt(coord.split(",")[0])
-                      let cy = parseInt(coord.split(",")[1])
-                      let cr = parseInt(coord.split(",")[2])
-                        ? parseInt(coord.split(",")[2])
-                        : 10
-                      return (
-                        <circle
-                          key={k}
-                          onClick={() => _showObject(obj, key)}
-                          cx={cx}
-                          cy={cy}
-                          r={cr}
-                          className={vitrinaStyles.circle}
-                        ></circle>
-                      )
-                    })
-                  })}
-                </svg>
-              </div>
-              <Carousel.Caption className={vitrinaStyles.Modal}>
-                <Modal
-                  show={showHelp}
-                  onHide={() => toggleShowHelp(showHelp)}
-                  dialogClassName={vitrinaStyles.modalHelpDialog}
-                >
-                  <Modal.Header className={vitrinaStyles.Help} closeButton>
-                    <Modal.Title>
-                      Recorre la vitrina y seleccione objetos
-                    </Modal.Title>
-                  </Modal.Header>
-                </Modal>
-              </Carousel.Caption>
-            </Carousel.Item>
-          )
-        })}
-      </Carousel>
-      <ObjectComponent props={modalObjectProps} />
+      <VitrinaCarousel vitrinas={vitrinas} />
+      <ObjectComponent object={object} />
     </Layout>
   )
 }
 
 const mapStateToProps = state => ({
-  showHelp: state.app.showHelp,
+  object: state.app.obj,
 })
 
-const mapDispatchToProps = dispatch => ({
-  toggleShowHelp(showHelp) {
-    dispatch({
-      type: "TOGGLE_SHOWHELP",
-      showHelp,
-    })
-  },
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Vitrina)
+export default connect(mapStateToProps, null)(Vitrina)

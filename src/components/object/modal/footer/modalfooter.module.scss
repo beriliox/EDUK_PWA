@@ -1,0 +1,47 @@
+.modalContentFooter {
+  background-color: #343434;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 0;
+  p {
+    color: white;
+    font-weight: 500;
+    margin: 0;
+  }
+  .objectTitle {
+    color: #eb5b28;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  .objectInfoBlock {
+    margin: 0;
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  .objectInfo {
+    margin: auto;
+    width: 60%;
+    margin-bottom: 1rem;
+  }
+
+  .objectInfoResources {
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    width: 60%;
+    p:first-child {
+      margin: 0;
+      border-left: 2px solid white;
+    }
+    p {
+      border-right: 2px solid white;
+      padding: 0.5rem;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
