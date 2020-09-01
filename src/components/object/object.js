@@ -7,9 +7,7 @@ import ModalHeader from "./modal/header/modalheader"
 import ModalBody from "./modal/body/modalbody"
 import ModalFooter from "./modal/footer/modalfooter"
 
-const ObjectComponent = ({ object, show, toggleShow, showBody }) => {
-  const objectImages = object ? object.relationships.field_imagen : []
-
+const ObjectComponent = ({ object, show, toggleShow }) => {
   return (
     <>
       <Modal
@@ -18,9 +16,7 @@ const ObjectComponent = ({ object, show, toggleShow, showBody }) => {
         dialogClassName={objectStyles.modalObjectDialog}
       >
         <ModalHeader object={object} />
-        {showBody ? (
-          <ModalBody object={object} objectImages={objectImages} />
-        ) : null}
+        <ModalBody object={object} />
         <ModalFooter object={object} />
       </Modal>
     </>
@@ -29,7 +25,6 @@ const ObjectComponent = ({ object, show, toggleShow, showBody }) => {
 
 const mapStateToProps = state => ({
   show: state.app.show,
-  showBody: state.app.showBody,
 })
 
 const mapDispatchToProps = dispatch => ({

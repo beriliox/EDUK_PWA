@@ -5,7 +5,7 @@ import modalBodyStyles from "./modalbody.module.scss"
 
 const ModalBody = ({
   object,
-  objectImages,
+  showBody,
   toggleShowBody,
   toggleShow3D,
   toggleShowVideo,
@@ -27,7 +27,9 @@ const ModalBody = ({
     })
   }
 
-  return (
+  const objectImages = object ? object.relationships.field_imagen : []
+
+  return showBody ? (
     <Modal.Body className={modalBodyStyles.modalBody}>
       <div className={modalBodyStyles.modalImagesBlock}>
         {objectImages.map((image, key) => {
@@ -46,10 +48,12 @@ const ModalBody = ({
         })}
       </div>
     </Modal.Body>
-  )
+  ) : null
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = state => ({
+  showBody: state.app.showBody,
+})
 
 const mapDispatchToProps = dispatch => ({
   toggleShowBody(showBody) {
