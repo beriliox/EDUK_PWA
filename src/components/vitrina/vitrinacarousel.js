@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
 import BackgroundCarousel from "./backgroundcarousel"
-
+import TouchIcon from "./touchicon"
 const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
   return (
     <Carousel
@@ -25,7 +25,10 @@ const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
               >
                 <Modal.Header className={vitrinaStyles.Help} closeButton>
                   <Modal.Title>
-                    Recorre la vitrina y seleccione objetos
+                    <TouchIcon />
+                    <span className={vitrinaStyles.HelpMessage}>
+                      Recorre la vitrina y seleccione objetos
+                    </span>
                   </Modal.Title>
                 </Modal.Header>
               </Modal>
