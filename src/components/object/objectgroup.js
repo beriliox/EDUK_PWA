@@ -1,16 +1,18 @@
 import React from "react"
 import { connect } from "react-redux"
-import vitrinaStyles from "./vitrina.module.scss"
-import "./vitrina.css"
+import { Image, Modal } from "react-bootstrap"
+import objectGroupStyles from "./objectgroup.module.scss"
+import objectStyles from "./object.module.scss"
+import TouchIcon from "../vitrina/touchicon"
+import "./object.css"
 
-const BackgroundCarousel = ({
-  props,
-  toggleOnSelect,
-  toggleOnSelectGroup,
+const ObjectGroup = ({
+  group,
+  showGroup,
+  toggleShowGroup,
   toggleObject,
   toggleGroup,
   toggleShow,
-  toggleShowGroup,
   toggleShowDefaultImage,
   toggleShow3D,
   toggleShowVideo,
@@ -22,15 +24,9 @@ const BackgroundCarousel = ({
   toggleShowSelectMasInfo,
   toggleShowSelectCedula,
 }) => {
-  const vitrina = props.vitrina
-  const keyID = props.key
-  const _showGroup = (group, key) => {
-    toggleOnSelectGroup(key)
-    toggleGroup(group)
-    toggleShowGroup(true)
-  }
-  const _showObject = (obj, key) => {
-    toggleOnSelect(key)
+  const _showObject = obj => {
+    toggleShowGroup(false)
+    toggleGroup([])
     toggleObject(obj)
     toggleShow(true)
 
@@ -48,69 +44,38 @@ const BackgroundCarousel = ({
     toggleShowSelectCedula("selected")
     /**/
   }
-  const _showCoords = e => {
-    let x = e.nativeEvent.offsetX
-    let y = e.nativeEvent.offsetY
-    console.log(x, y)
-  }
   return (
-    <div
-      width="800"
-      height="1280"
-      onClick={e => _showCoords(e)}
-      style={{
-        backgroundImage: `
-              url(${vitrina.relationships.field_imagen_vitrina.localFile.publicURL}),
-              linear-gradient(rgba(0,0,0,50%), white, white)
-            `,
-      }}
-    >
-      <svg width="800" height="1280">
-        {vitrina.relationships.node__grupo.map(grupo => {
-          const objetoGroups = grupo.relationships.node__objeto
-            ? grupo.relationships.node__objeto
-            : []
-          const objetoGroupsLength = objetoGroups.length
-          return grupo.field_coords.map(coord => {
-            let cx = parseInt(coord.split(",")[0])
-            let cy = parseInt(coord.split(",")[1])
-            let cr = parseInt(coord.split(",")[2])
-              ? parseInt(coord.split(",")[2])
-              : 10
-            return objetoGroups.map((obj, k) => {
-              if (objetoGroupsLength === 1) {
-                return (
-                  <circle
-                    key={k}
-                    onClick={() => _showObject(obj, keyID)}
-                    cx={cx}
-                    cy={cy}
-                    r={cr}
-                    className={vitrinaStyles.circle}
-                  ></circle>
-                )
-              }
-              if (objetoGroupsLength > 1) {
-                return (
-                  <circle
-                    key={k}
-                    onClick={() => _showGroup(objetoGroups, keyID)}
-                    cx={cx}
-                    cy={cy}
-                    r={cr}
-                    className={vitrinaStyles.circle}
-                  ></circle>
-                )
-              }
-            })
-          })
-        })}
-      </svg>
-    </div>
+    <>
+      <Modal
+        show={showGroup}
+        onHide={() => toggleShowGroup(!showGroup)}
+        dialogClassName={objectStyles.modalObjectDialog}
+      >
+        <Modal.Header className={objectGroupStyles.ModalHeader} closeButton>
+          {group.map(obj => {
+            const imagePath =
+              obj.relationships.field_imagen[0].localFile.publicURL
+            return (
+              <Image
+                src={imagePath}
+                onClick={() => _showObject(obj)}
+                className={objectGroupStyles.Img}
+              />
+            )
+          })}
+        </Modal.Header>
+        <Modal.Body className={objectGroupStyles.MessageBlock}>
+          <span>Selecciona un objeto</span>
+          <TouchIcon />
+        </Modal.Body>
+      </Modal>
+    </>
   )
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = state => ({
+  showGroup: state.app.showGroup,
+})
 
 const mapDispatchToProps = dispatch => ({
   toggleObject(obj) {
@@ -210,5 +175,4 @@ const mapDispatchToProps = dispatch => ({
     })
   },
 })
-
-export default connect(mapStateToProps, mapDispatchToProps)(BackgroundCarousel)
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectGroup)

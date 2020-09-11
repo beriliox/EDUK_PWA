@@ -3,9 +3,10 @@ import Layout from "../components/layout"
 import { connect } from "react-redux"
 import { useStaticQuery, graphql } from "gatsby"
 import ObjectComponent from "../components/object/object"
+import ObjectGroup from "../components/object/objectgroup"
 import VitrinaCarousel from "../components/vitrina/vitrinacarousel"
 
-const Vitrina = ({ object }) => {
+const Vitrina = ({ object, group }) => {
   const query = useStaticQuery(
     graphql`
       query($drupal_internal__nid: Int) {
@@ -21,32 +22,36 @@ const Vitrina = ({ object }) => {
                     publicURL
                   }
                 }
-                node__objeto {
-                  drupal_internal__nid
-                  title
-                  body {
-                    value
-                  }
-                  field_material
-                  field_codigo
-                  field_sitio_arqueologico
-                  field_comuna
-                  field_provincia
+                node__grupo {
                   field_coords
                   relationships {
-                    field_video {
-                      localFile {
-                        publicURL
+                    node__objeto {
+                      drupal_internal__nid
+                      title
+                      body {
+                        value
                       }
-                    }
-                    field_3d {
-                      localFile {
-                        publicURL
-                      }
-                    }
-                    field_imagen {
-                      localFile {
-                        publicURL
+                      field_material
+                      field_codigo
+                      field_sitio_arqueologico
+                      field_comuna
+                      field_provincia
+                      relationships {
+                        field_video {
+                          localFile {
+                            publicURL
+                          }
+                        }
+                        field_3d {
+                          localFile {
+                            publicURL
+                          }
+                        }
+                        field_imagen {
+                          localFile {
+                            publicURL
+                          }
+                        }
                       }
                     }
                   }
@@ -67,12 +72,14 @@ const Vitrina = ({ object }) => {
     <Layout key={Math.round(Math.random())}>
       <VitrinaCarousel vitrinas={vitrinas} />
       <ObjectComponent object={object} />
+      <ObjectGroup group={group} />
     </Layout>
   )
 }
 
 const mapStateToProps = state => ({
   object: state.app.obj,
+  group: state.app.group,
 })
 
 export default connect(mapStateToProps, null)(Vitrina)

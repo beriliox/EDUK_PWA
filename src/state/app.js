@@ -1,8 +1,11 @@
 const initialState = {
   showHelp: true,
   onSelect: 0,
+  onSelectGroup: 0,
   show: false,
   obj: false,
+  showGroup: false,
+  group: [],
   showBody: true,
   showDefaultImage: true,
   showImage: false,
@@ -22,15 +25,30 @@ export default (state = initialState, action) => {
         ...state,
         obj: action.obj,
       }
+    case "TOGGLE_GROUP":
+      return {
+        ...state,
+        group: action.group,
+      }
     case "TOGGLE_ONSELECT":
       return {
         ...state,
         onSelect: action.onSelect,
       }
+    case "TOGGLE_ONSELECT_GROUP":
+      return {
+        ...state,
+        onSelectGroup: action.onSelectGroup,
+      }
     case "TOGGLE_SHOW":
       return {
         ...state,
         show: action.show,
+      }
+    case "TOGGLE_SHOW_OBJECT":
+      return {
+        ...state,
+        showGroup: action.showGroup,
       }
     case "TOGGLE_SHOWHELP":
       return {
