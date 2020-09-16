@@ -1,11 +1,36 @@
 import React from "react"
 import { Carousel, Modal } from "react-bootstrap"
 import { connect } from "react-redux"
+import { useIdleTimer } from "react-idle-timer"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
 import BackgroundCarousel from "./backgroundcarousel"
 import TouchIcon from "./touchicon"
 const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
+  const handleOnIdle = event => {
+    //console.log("user is idle", event)
+    //console.log("last active", getLastActiveTime())
+    toggleShowHelp(true)
+  }
+
+  const handleOnActive = event => {
+    //console.log("user is active", event)
+    //console.log("time remaining", getRemainingTime())
+  }
+
+  const handleOnAction = e => {
+    //console.log("user did something", e)
+  }
+
+  const { getRemainingTime, getLastActiveTime } = useIdleTimer({
+    timeout: 1000 * 10,
+    //timeout: 1000 * 60 * 15,
+    onIdle: handleOnIdle,
+    onActive: handleOnActive,
+    onAction: handleOnAction,
+    debounce: 500,
+  })
+
   return (
     <Carousel
       key={Math.round(Math.random())}
