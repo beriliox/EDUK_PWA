@@ -1,11 +1,9 @@
 import React from "react"
 import Layout from "../components/layout"
 import { connect } from "react-redux"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import vitrinaStyles from "./vitrina.module.scss"
 import SEO from "../components/seo"
-import Tablet from "../components/tablet/tablet"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 const Vitrina = () => {
   const query = useStaticQuery(
     graphql`
@@ -87,23 +85,12 @@ const Vitrina = () => {
               </h2>
               <ol className={vitrinaStyles.vitrinas}>
                 {tablets.map((edge, key) => {
-                  const vitrinas = edge.relationships.node__imagenes_vitrina
-                    ? edge.relationships.node__imagenes_vitrina
-                    : []
-
                   return (
-                    <Router>
-                      <li className={vitrinaStyles.vitrina} key={key}>
-                        <Link to={`/tablet`}>
-                          <h2>{edge.title}</h2>
-                        </Link>
-                      </li>
-                      <Switch>
-                        <Route>
-                          <Tablet vitrinas={vitrinas} />
-                        </Route>
-                      </Switch>
-                    </Router>
+                    <li className={vitrinaStyles.vitrina} key={key}>
+                      <Link to={`/tablet/${edge.node.drupal_internal__nid}`}>
+                        <h2>{edge.node.title}</h2>
+                      </Link>
+                    </li>
                   )
                 })}
               </ol>
