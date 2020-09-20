@@ -4,7 +4,6 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import BackgroundImage from "gatsby-background-image"
 import indexStyles from "./index.module.scss"
 
 const IndexPage = () => {
@@ -32,10 +31,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <BackgroundImage
-        className={indexStyles.masthead}
-        fluid={query.indexImage.childImageSharp.fluid}
-      >
+      <div className={indexStyles.Background}>
         {
           <div className={indexStyles.blackOverlay}>
             <div className={indexStyles.contentBox}>
@@ -57,7 +53,7 @@ const IndexPage = () => {
             </div>
           </div>
         }
-      </BackgroundImage>
+      </div>
     </Layout>
   )
 }

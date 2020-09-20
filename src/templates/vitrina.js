@@ -2,11 +2,11 @@ import React from "react"
 import Layout from "../components/layout"
 import { connect } from "react-redux"
 import { useStaticQuery, graphql } from "gatsby"
-import ObjectComponent from "../components/object/object"
-import ObjectGroup from "../components/object/objectgroup"
-import VitrinaCarousel from "../components/vitrina/vitrinacarousel"
-
-const Vitrina = ({ object, group }) => {
+import vitrinaStyles from "./vitrina.module.scss"
+import SEO from "../components/seo"
+import Tablet from "../components/tablet/tablet"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+const Vitrina = () => {
   const query = useStaticQuery(
     graphql`
       query($drupal_internal__nid: Int) {
@@ -14,42 +14,48 @@ const Vitrina = ({ object, group }) => {
           drupal_internal__nid
           title
           relationships {
-            node__imagenes_vitrina {
+            node__tablet {
+              drupal_internal__nid
               title
               relationships {
-                field_imagen_vitrina {
-                  localFile {
-                    publicURL
-                  }
-                }
-                node__grupo {
-                  field_coords
+                node__imagenes_vitrina {
+                  title
                   relationships {
-                    node__objeto {
-                      drupal_internal__nid
-                      title
-                      body {
-                        value
+                    field_imagen_vitrina {
+                      localFile {
+                        publicURL
                       }
-                      field_material
-                      field_codigo
-                      field_sitio_arqueologico
-                      field_comuna
-                      field_provincia
+                    }
+                    node__grupo {
+                      field_coords
                       relationships {
-                        field_video {
-                          localFile {
-                            publicURL
+                        node__objeto {
+                          drupal_internal__nid
+                          title
+                          body {
+                            value
                           }
-                        }
-                        field_3d {
-                          localFile {
-                            publicURL
-                          }
-                        }
-                        field_imagen {
-                          localFile {
-                            publicURL
+                          field_material
+                          field_codigo
+                          field_sitio_arqueologico
+                          field_comuna
+                          field_provincia
+                          relationships {
+                            field_video {
+                              localFile {
+                                publicURL
+                              }
+                            }
+                            field_3d {
+                              localFile {
+                                publicURL
+                              }
+                            }
+                            field_imagen {
+                              localFile {
+                                publicURL
+                              }
+                            }
                           }
                         }
                       }
@@ -64,15 +70,47 @@ const Vitrina = ({ object, group }) => {
     `
   )
 
-  const vitrinas = query.nodeVitrina.relationships.node__imagenes_vitrina
-    ? query.nodeVitrina.relationships.node__imagenes_vitrina
+  const tablets = query.nodeVitrina.relationships.node__tablet
+    ? query.nodeVitrina.relationships.node__tablet
     : []
 
   return (
     <Layout key={Math.round(Math.random())}>
-      <VitrinaCarousel vitrinas={vitrinas} />
-      <ObjectComponent object={object} />
-      <ObjectGroup group={group} />
+      <SEO title="Vitrinas" />
+      <div className={vitrinaStyles.Background}>
+        {
+          <div className={vitrinaStyles.blackOverlay}>
+            <div className={vitrinaStyles.contentBox}>
+              <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
+              <h2 className={vitrinaStyles.subtitlesH2}>
+                Seleccione una tablet
+              </h2>
+              <ol className={vitrinaStyles.vitrinas}>
+                {tablets.map((edge, key) => {
+                  const vitrinas = edge.relationships.node__imagenes_vitrina
+                    ? edge.relationships.node__imagenes_vitrina
+                    : []
+
+                  return (
+                    <Router>
+                      <li className={vitrinaStyles.vitrina} key={key}>
+                        <Link to={`/tablet`}>
+                          <h2>{edge.title}</h2>
+                        </Link>
+                      </li>
+                      <Switch>
+                        <Route>
+                          <Tablet vitrinas={vitrinas} />
+                        </Route>
+                      </Switch>
+                    </Router>
+                  )
+                })}
+              </ol>
+            </div>
+          </div>
+        }
+      </div>
     </Layout>
   )
 }
