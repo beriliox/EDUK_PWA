@@ -1,12 +1,12 @@
 import React from "react"
-import Layout from "../layout"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import Layout from "../components/layout"
+import { useStaticQuery, graphql } from "gatsby"
 import { connect } from "react-redux"
-import ObjectComponent from "../object/object"
-import ObjectGroup from "../object/objectgroup"
-import VitrinaCarousel from "../vitrina/vitrinacarousel"
+import ObjectComponent from "../components/object/object"
+import ObjectGroup from "../components/object/objectgroup"
+import VitrinaCarousel from "../components/vitrina/vitrinacarousel"
 
-const Tablet = ({ object, group, vitrinas }) => {
+const Tablet = ({ object, group }) => {
   const query = useStaticQuery(
     graphql`
       query($drupal_internal__nid: Int) {
@@ -63,8 +63,17 @@ const Tablet = ({ object, group, vitrinas }) => {
       }
     `
   )
-  console.log(query)
-  return false
+  const vitrinas = query.nodeTablet.relationships.node__imagenes_vitrina
+    ? query.nodeTablet.relationships.node__imagenes_vitrina
+    : []
+
+  return (
+    <Layout key={Math.round(Math.random())}>
+      <VitrinaCarousel vitrinas={vitrinas} />
+      <ObjectComponent object={object} />
+      <ObjectGroup group={group} />
+    </Layout>
+  )
 }
 
 const mapStateToProps = state => ({

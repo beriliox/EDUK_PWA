@@ -15,52 +15,6 @@ const Vitrina = () => {
             node__tablet {
               drupal_internal__nid
               title
-              relationships {
-                node__imagenes_vitrina {
-                  title
-                  relationships {
-                    field_imagen_vitrina {
-                      localFile {
-                        publicURL
-                      }
-                    }
-                    node__grupo {
-                      field_coords
-                      relationships {
-                        node__objeto {
-                          drupal_internal__nid
-                          title
-                          body {
-                            value
-                          }
-                          field_material
-                          field_codigo
-                          field_sitio_arqueologico
-                          field_comuna
-                          field_provincia
-                          relationships {
-                            field_video {
-                              localFile {
-                                publicURL
-                              }
-                            }
-                            field_3d {
-                              localFile {
-                                publicURL
-                              }
-                            }
-                            field_imagen {
-                              localFile {
-                                publicURL
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
             }
           }
         }
@@ -87,8 +41,8 @@ const Vitrina = () => {
                 {tablets.map((edge, key) => {
                   return (
                     <li className={vitrinaStyles.vitrina} key={key}>
-                      <Link to={`/tablet/${edge.node.drupal_internal__nid}`}>
-                        <h2>{edge.node.title}</h2>
+                      <Link to={`/tablet/${edge.drupal_internal__nid}`}>
+                        <h2>{edge.title}</h2>
                       </Link>
                     </li>
                   )

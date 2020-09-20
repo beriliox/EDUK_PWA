@@ -34,4 +34,27 @@ module.exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
+  const tabletTemplate = path.resolve("./src/components/tablet/tablet.js")
+  const resTablet = await graphql(`
+    query {
+      allNodeTablet {
+        edges {
+          node {
+            drupal_internal__nid
+          }
+        }
+      }
+    }
+  `)
+
+  resTablet.data.allNodeTablet.edges.forEach(edge => {
+    createPage({
+      component: tabletTemplate,
+      path: `/tablet/${edge.node.drupal_internal__nid}`,
+      context: {
+        drupal_internal__nid: edge.node.drupal_internal__nid,
+      },
+    })
+  })
 }
