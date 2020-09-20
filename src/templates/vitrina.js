@@ -16,7 +16,6 @@ const Vitrina = query => {
         {
           <div className={vitrinaStyles.blackOverlay}>
             <div className={vitrinaStyles.contentBox}>
-              <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
               <h2 className={vitrinaStyles.subtitlesH2}>
                 Seleccione una tablet
               </h2>

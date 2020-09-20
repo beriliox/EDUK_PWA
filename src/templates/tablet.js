@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import ObjectComponent from "../components/object/object"
 import ObjectGroup from "../components/object/objectgroup"
 import VitrinaCarousel from "../components/vitrina/vitrinacarousel"
+import SEO from "../components/seo"
 
 const Tablet = props => {
   const query = props.data
@@ -17,6 +18,7 @@ const Tablet = props => {
 
   return (
     <Layout key={Math.round(Math.random())}>
+      <SEO title="Tablet" />
       <VitrinaCarousel vitrinas={vitrinas} />
       <ObjectComponent object={object} />
       <ObjectGroup group={group} />
