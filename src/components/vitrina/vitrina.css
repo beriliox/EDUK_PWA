@@ -49,3 +49,11 @@ div[class*="modalHelpDialog"] .modal-content .modal-title {
   height: 2px;
   background-clip: unset;
 }
+
+.modal-backdrop.show {
+  opacity: 0 !important;
+}
+
+.modal-backdrop.fade {
+  opacity: 0 !important;
+}
