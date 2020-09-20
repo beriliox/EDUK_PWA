@@ -17,14 +17,6 @@ const IndexPage = () => {
           }
         }
       }
-
-      indexImage: file(relativePath: { eq: "home.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 1800) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
     }
   `)
 
