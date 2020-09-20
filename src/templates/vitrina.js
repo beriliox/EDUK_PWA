@@ -1,29 +1,12 @@
 import React from "react"
 import Layout from "../components/layout"
 import { connect } from "react-redux"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import vitrinaStyles from "./vitrina.module.scss"
 import SEO from "../components/seo"
-const Vitrina = () => {
-  const query = useStaticQuery(
-    graphql`
-      query($drupal_internal__nid: Int) {
-        nodeVitrina(drupal_internal__nid: { eq: $drupal_internal__nid }) {
-          drupal_internal__nid
-          title
-          relationships {
-            node__tablet {
-              drupal_internal__nid
-              title
-            }
-          }
-        }
-      }
-    `
-  )
-
-  const tablets = query.nodeVitrina.relationships.node__tablet
-    ? query.nodeVitrina.relationships.node__tablet
+const Vitrina = query => {
+  const tablets = query.data.nodeVitrina.relationships.node__tablet
+    ? query.data.nodeVitrina.relationships.node__tablet
     : []
 
   return (
@@ -62,3 +45,18 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, null)(Vitrina)
+
+export const query = graphql`
+  query($drupal_internal__nid: Int) {
+    nodeVitrina(drupal_internal__nid: { eq: $drupal_internal__nid }) {
+      drupal_internal__nid
+      title
+      relationships {
+        node__tablet {
+          drupal_internal__nid
+          title
+        }
+      }
+    }
+  }
+`

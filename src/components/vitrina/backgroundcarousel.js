@@ -53,6 +53,11 @@ const BackgroundCarousel = ({
     let y = e.nativeEvent.offsetY
     console.log(x, y)
   }
+
+  const grupos = vitrina.relationships.node__grupo
+    ? vitrina.relationships.node__grupo
+    : []
+
   return (
     <div
       width="800"
@@ -66,7 +71,7 @@ const BackgroundCarousel = ({
       }}
     >
       <svg width="800" height="1280">
-        {vitrina.relationships.node__grupo.map(grupo => {
+        {grupos.map(grupo => {
           const objetoGroups = grupo.relationships.node__objeto
             ? grupo.relationships.node__objeto
             : []

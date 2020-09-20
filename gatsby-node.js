@@ -35,7 +35,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const tabletTemplate = path.resolve("./src/components/tablet/tablet.js")
+  const tabletTemplate = path.resolve("./src/templates/tablet.js")
   const resTablet = await graphql(`
     query {
       allNodeTablet {
