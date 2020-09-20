@@ -31,7 +31,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <div className={indexStyles.Background}>
+      <div id={`main-height`} className={indexStyles.Background}>
         {
           <div className={indexStyles.blackOverlay}>
             <div className={indexStyles.contentBox}>

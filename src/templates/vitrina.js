@@ -12,7 +12,7 @@ const Vitrina = query => {
   return (
     <Layout key={Math.round(Math.random())}>
       <SEO title="Vitrinas" />
-      <div className={vitrinaStyles.Background}>
+      <div id={`main-height`} className={vitrinaStyles.Background}>
         {
           <div className={vitrinaStyles.blackOverlay}>
             <div className={vitrinaStyles.contentBox}>
