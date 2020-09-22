@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import indexStyles from "./index.module.scss"
+import Pagination from "react-pagination-list"
 
 const IndexPage = () => {
   const query = useStaticQuery(graphql`
@@ -20,6 +21,8 @@ const IndexPage = () => {
     }
   `)
 
+  const vitrinas = query.allNodeVitrina.edges
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -31,17 +34,22 @@ const IndexPage = () => {
               <h2 className={indexStyles.subtitlesH2}>
                 Seleccione una vitrina
               </h2>
-              <ol className={indexStyles.vitrinas}>
-                {query.allNodeVitrina.edges.map((edge, key) => {
-                  return (
-                    <li className={indexStyles.vitrina} key={key}>
-                      <Link to={`/vitrina/${edge.node.drupal_internal__nid}`}>
-                        <h2>{edge.node.title}</h2>
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ol>
+
+              <div className={indexStyles.vitrina}>
+                <Pagination
+                  className={indexStyles.vitrinas}
+                  data={vitrinas}
+                  pageSize={9}
+                  renderItem={(item, key) => (
+                    <Link
+                      key={key}
+                      to={`/vitrina/${item.node.drupal_internal__nid}`}
+                    >
+                      <h2>{item.node.title}</h2>
+                    </Link>
+                  )}
+                />
+              </div>
             </div>
           </div>
         }

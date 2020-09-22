@@ -19,6 +19,7 @@
     display: block;
     padding: 1rem;
     text-decoration: none;
+    margin-bottom: calc(1.45rem / 2);
   }
   a:hover {
     background: #e4e4e4;
@@ -31,6 +32,20 @@
     color: #777777;
     font-size: 0.8rem;
     font-style: italic;
+  }
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 3rem !important;
+    li {
+      width: 50px !important;
+      height: 50px !important;
+      color: black !important;
+      border-color: black !important;
+      i {
+        color: black !important;
+      }
+    }
   }
 }
 
