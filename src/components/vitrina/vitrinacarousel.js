@@ -51,7 +51,7 @@ const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
                   <Modal.Title>
                     <TouchIcon />
                     <span className={vitrinaStyles.HelpMessage}>
-                      Recorre la vitrina y seleccione objetos
+                      Recorre la vitrina y selecciona objetos
                     </span>
                   </Modal.Title>
                 </Modal.Header>

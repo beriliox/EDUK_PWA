@@ -16,12 +16,15 @@
   border: 0;
   padding: 1rem;
   color: white;
-  font-weight: 500;
+  font-weight: 300;
   .HelpMessage {
-    margin-left: 1.5rem;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
   }
 }
 
 .modalHelpDialog {
   margin: 33rem auto;
+  max-width: 550px;
 }
