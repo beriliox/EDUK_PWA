@@ -17,6 +17,9 @@
   padding: 1rem;
   color: white;
   font-weight: 300;
+  height: 100%;
+  align-items: center;
+  border-radius: 0;
   .HelpMessage {
     margin-left: 0.5rem;
     display: flex;
@@ -25,6 +28,7 @@
 }
 
 .modalHelpDialog {
-  margin: 33rem auto;
-  max-width: 550px;
+  margin: 34rem auto;
+  max-width: 545px;
+  height: 115px;
 }

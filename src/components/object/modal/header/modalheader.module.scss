@@ -6,6 +6,7 @@
 .modalHeader {
   @extend .modalContent;
   padding: 0;
+  border-radius: 0;
   .Video {
     width: 100%;
     margin: 0;
@@ -17,17 +18,26 @@
       }
     }
   }
+  .defaultImage {
+    padding: 10px;
+  }
   .Image {
-    padding: 10px 10px 0 10px;
+    padding: 0;
     width: 680px;
     height: 445px;
     margin: 0;
   }
   .MasInfo {
     background-color: #676767;
-    padding: 2rem 4rem;
+    padding: 3rem 0;
+    max-width: 65%;
+    margin: auto;
     font-size: 23px;
     color: white;
-    font-weight: 400;
+    font-weight: 300;
+    p {
+      font-family: "Messina Sans", sans-serif;
+      font-weight: 300;
+    }
   }
 }

@@ -1,15 +1,19 @@
 .modal-content {
   border: 0;
+  border-radius: 0;
 }
 
 div[class*="modalHelpDialog"] .modal-content {
-  border: 1px solid #2a2e31;
+  height: 100%;
 }
 
 div[class*="modalHelpDialog"] .modal-content .close {
-  right: 0.5rem;
-  top: 0;
+  right: 4px;
+  top: -7px;
   color: white;
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 36px;
 }
 
 div[class*="modalHelpDialog"] .modal-content .modal-title {
