@@ -56,7 +56,7 @@ const VitrinaCarousel = ({
               >
                 <Modal.Header className={vitrinaStyles.Help} closeButton>
                   <Modal.Title className={vitrinaStyles.ModalTitle}>
-                    <HandIcon className={BackgroundCarousel.Icon} />
+                    <HandIcon className={vitrinaStyles.Icon} />
                     <span className={vitrinaStyles.HelpMessage}>
                       Recorre la vitrina y selecciona objetos
                     </span>
