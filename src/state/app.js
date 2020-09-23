@@ -1,6 +1,7 @@
 const initialState = {
   showHelp: true,
   onSelect: 0,
+  showControls: true,
   onSelectGroup: 0,
   show: false,
   obj: false,
@@ -59,6 +60,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showBody: action.showBody,
+      }
+    case "TOGGLE_SHOW_CONTROLS":
+      return {
+        ...state,
+        showControls: action.showControls,
       }
     case "TOGGLE_SHOWDEFAULT_IMAGE":
       return {

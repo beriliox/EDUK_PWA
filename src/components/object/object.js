@@ -7,12 +7,16 @@ import ModalHeader from "./modal/header/modalheader"
 import ModalBody from "./modal/body/modalbody"
 import ModalFooter from "./modal/footer/modalfooter"
 
-const ObjectComponent = ({ object, show, toggleShow }) => {
+const ObjectComponent = ({ object, show, toggleShow, toggleShowControls }) => {
+  const _onHide = show => {
+    toggleShowControls(true)
+    toggleShow(!show)
+  }
   return (
     <>
       <Modal
         show={show}
-        onHide={() => toggleShow(!show)}
+        onHide={() => _onHide(show)}
         dialogClassName={objectStyles.modalObjectDialog}
       >
         <ModalHeader object={object} />
@@ -32,6 +36,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOW",
       show,
+    })
+  },
+  toggleShowControls(showControls) {
+    dispatch({
+      type: "TOGGLE_SHOW_CONTROLS",
+      showControls,
     })
   },
 })

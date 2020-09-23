@@ -23,7 +23,13 @@ const ObjectGroup = ({
   toggleShowSelect3D,
   toggleShowSelectMasInfo,
   toggleShowSelectCedula,
+  toggleShowControls,
 }) => {
+  const _onHide = showGroup => {
+    toggleShowControls(true)
+    toggleShowGroup(!showGroup)
+  }
+
   const _showObject = obj => {
     toggleShowGroup(false)
     toggleGroup([])
@@ -48,7 +54,7 @@ const ObjectGroup = ({
     <>
       <Modal
         show={showGroup}
-        onHide={() => toggleShowGroup(!showGroup)}
+        onHide={() => _onHide(showGroup)}
         dialogClassName={objectStyles.modalObjectDialog}
       >
         <Modal.Header className={objectGroupStyles.ModalHeader} closeButton>
@@ -106,6 +112,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOW",
       show,
+    })
+  },
+  toggleShowControls(showControls) {
+    dispatch({
+      type: "TOGGLE_SHOW_CONTROLS",
+      showControls,
     })
   },
   toggleShowGroup(showGroup) {

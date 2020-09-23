@@ -6,7 +6,13 @@ import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
 import BackgroundCarousel from "./backgroundcarousel"
 import TouchIcon from "./touchicon"
-const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
+const VitrinaCarousel = ({
+  vitrinas,
+  showHelp,
+  onSelect,
+  toggleShowHelp,
+  showControls,
+}) => {
   const handleOnIdle = event => {
     //console.log("user is idle", event)
     //console.log("last active", getLastActiveTime())
@@ -35,6 +41,7 @@ const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
       key={Math.round(Math.random())}
       defaultActiveIndex={onSelect}
       interval={null}
+      controls={showControls}
     >
       {vitrinas.map((vitrina, key) => {
         const vitrinaObj = { vitrina, key }
@@ -67,6 +74,7 @@ const VitrinaCarousel = ({ vitrinas, showHelp, onSelect, toggleShowHelp }) => {
 const mapStateToProps = state => ({
   showHelp: state.app.showHelp,
   onSelect: state.app.onSelect,
+  showControls: state.app.showControls,
 })
 
 const mapDispatchToProps = dispatch => ({

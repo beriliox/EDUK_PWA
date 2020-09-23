@@ -21,15 +21,18 @@ const BackgroundCarousel = ({
   toggleShowSelect3D,
   toggleShowSelectMasInfo,
   toggleShowSelectCedula,
+  toggleShowControls,
 }) => {
   const vitrina = props.vitrina
   const keyID = props.key
   const _showGroup = (group, key) => {
+    toggleShowControls(false)
     toggleOnSelectGroup(key)
     toggleGroup(group)
     toggleShowGroup(true)
   }
   const _showObject = (obj, key) => {
+    toggleShowControls(false)
     toggleOnSelect(key)
     toggleObject(obj)
     toggleShow(true)
@@ -146,6 +149,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOW",
       show,
+    })
+  },
+  toggleShowControls(showControls) {
+    dispatch({
+      type: "TOGGLE_SHOW_CONTROLS",
+      showControls,
     })
   },
   toggleShowGroup(showGroup) {
