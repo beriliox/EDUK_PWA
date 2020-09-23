@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { Image, Modal } from "react-bootstrap"
 import objectGroupStyles from "./objectgroup.module.scss"
-import TouchIcon from "../vitrina/touchicon"
+import HandIcon from "../../assets/hand-icon.svg"
 import "./object.css"
 
 const ObjectGroup = ({
@@ -71,7 +71,7 @@ const ObjectGroup = ({
         </Modal.Header>
         <Modal.Body className={objectGroupStyles.MessageBlock}>
           <span>Selecciona un objeto</span>
-          <TouchIcon />
+          <HandIcon className={objectGroupStyles.Icon} />
         </Modal.Body>
       </Modal>
     </>

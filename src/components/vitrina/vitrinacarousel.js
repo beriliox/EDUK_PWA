@@ -5,7 +5,7 @@ import { useIdleTimer } from "react-idle-timer"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
 import BackgroundCarousel from "./backgroundcarousel"
-import TouchIcon from "./touchicon"
+import HandIcon from "../../assets/hand-icon.svg"
 const VitrinaCarousel = ({
   vitrinas,
   showHelp,
@@ -56,7 +56,7 @@ const VitrinaCarousel = ({
               >
                 <Modal.Header className={vitrinaStyles.Help} closeButton>
                   <Modal.Title>
-                    <TouchIcon />
+                    <HandIcon className={BackgroundCarousel.Icon} />
                     <span className={vitrinaStyles.HelpMessage}>
                       Recorre la vitrina y selecciona objetos
                     </span>

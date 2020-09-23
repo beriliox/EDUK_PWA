@@ -47,7 +47,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: process.env.DRUPAL_URL,
+        baseUrl: `https://dev-eduk-diseno.pantheonsite.io`,
         apiBase: `jsonapi`, // optional, defaults to `jsonapi`
         basicAuth: {
           username: process.env.BASIC_AUTH_USERNAME,
@@ -76,6 +76,14 @@ module.exports = {
         sampleRate: 5,
         siteSpeedSampleRate: 10,
         cookieDomain: "auto",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: `${__dirname}/src/assets/`,
+        },
       },
     },
   ],

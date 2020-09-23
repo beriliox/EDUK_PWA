@@ -28,10 +28,16 @@
   padding: 0;
   margin: 0;
 }
+
 .modalGroupDialog {
   display: flex;
   align-items: center;
   margin-top: -2rem;
   height: 1280px;
   max-width: 496px;
+}
+
+.Icon {
+  width: 3rem !important;
+  height: auto !important;
 }
