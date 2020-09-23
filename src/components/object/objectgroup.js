@@ -2,7 +2,6 @@ import React from "react"
 import { connect } from "react-redux"
 import { Image, Modal } from "react-bootstrap"
 import objectGroupStyles from "./objectgroup.module.scss"
-import objectStyles from "./object.module.scss"
 import TouchIcon from "../vitrina/touchicon"
 import "./object.css"
 
@@ -55,7 +54,7 @@ const ObjectGroup = ({
       <Modal
         show={showGroup}
         onHide={() => _onHide(showGroup)}
-        dialogClassName={objectStyles.modalObjectDialog}
+        dialogClassName={objectGroupStyles.modalGroupDialog}
       >
         <Modal.Header className={objectGroupStyles.ModalHeader} closeButton>
           {group.map(obj => {

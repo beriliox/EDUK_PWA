@@ -40,7 +40,7 @@ const ModalHeader = ({
         </div>
       ) : null}
       {showImage ? (
-        <div id="objectImage">
+        <div id="objectImage" className={modalHeaderStyles.objectImage}>
           <Image className={modalHeaderStyles.Image} src={selectedImage} />
         </div>
       ) : null}
