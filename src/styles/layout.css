@@ -618,3 +618,6 @@ pre tt:after {
 #main-height {
   height: 1280px;
 }
+button.close span {
+  line-height: 1rem;
+}

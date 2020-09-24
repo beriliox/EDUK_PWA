@@ -5,13 +5,12 @@
 
 .modalBody {
   @extend .modalContent;
-  padding: 5px;
+  padding: 0 0 10px;
   .imageCarousel {
     width: 110px;
     height: 110px;
-    margin: 0;
+    margin: 0 5px;
     padding: 0;
-    margin: 5px;
   }
   .modalImagesBlock {
     display: flex;
