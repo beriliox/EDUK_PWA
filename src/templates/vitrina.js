@@ -28,7 +28,7 @@ const Vitrina = props => {
                     <li className={vitrinaStyles.vitrina} key={key}>
                       <Link
                         to={`/tablet/${edge.drupal_internal__nid}`}
-                        onClick={() => toggleShowHelp(!showHelp)}
+                        onClick={() => toggleShowHelp(true)}
                       >
                         <h2>{edge.title}</h2>
                       </Link>
