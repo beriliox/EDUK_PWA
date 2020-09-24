@@ -24,10 +24,14 @@ const BackgroundCarousel = ({
   toggleShowSelectMasInfo,
   toggleShowSelectCedula,
   toggleShowControls,
+  setGradient,
+  toggleSetGradient,
+  toggleSetGradientClass,
+  setGradientClass,
 }) => {
   const query = useStaticQuery(graphql`
     query {
-      indexImage: file(relativePath: { eq: "images/gradient.png" }) {
+      degrantImage: file(relativePath: { eq: "gradient.png" }) {
         childImageSharp {
           fluid(maxWidth: 1800) {
             ...GatsbyImageSharpFluid
@@ -37,6 +41,7 @@ const BackgroundCarousel = ({
     }
   `)
 
+  const gradient = query.degrantImage.childImageSharp.fluid
   const vitrina = props.vitrina
   const keyID = props.key
   const _showGroup = (group, key) => {
@@ -44,6 +49,8 @@ const BackgroundCarousel = ({
     toggleOnSelectGroup(key)
     toggleGroup(group)
     toggleShowGroup(true)
+    toggleSetGradient(gradient)
+    toggleSetGradientClass("gradient")
   }
   const _showObject = (obj, key) => {
     toggleShowControls(false)
@@ -63,6 +70,8 @@ const BackgroundCarousel = ({
     toggleShowSelect3D("deselected")
     toggleShowSelectMasInfo("deselected")
     toggleShowSelectCedula("selected")
+    toggleSetGradient(gradient)
+    toggleSetGradientClass("gradient")
     /**/
   }
   const _showCoords = e => {
@@ -70,8 +79,6 @@ const BackgroundCarousel = ({
     let y = e.nativeEvent.offsetY
     console.log(x, y)
   }
-
-  console.log(query)
 
   const grupos = vitrina.relationships.node__grupo
     ? vitrina.relationships.node__grupo
@@ -89,7 +96,7 @@ const BackgroundCarousel = ({
             `,
       }}
     >
-      <BackgroundImage>
+      <BackgroundImage className={setGradientClass} fluid={setGradient}>
         <svg width="800" height="1280">
           {grupos.map(grupo => {
             const objetoGroups = grupo.relationships.node__objeto
@@ -136,8 +143,10 @@ const BackgroundCarousel = ({
   )
 }
 
-const mapStateToProps = () => ({})
-
+const mapStateToProps = state => ({
+  setGradient: state.app.setGradient,
+  setGradientClass: state.app.setGradientClass,
+})
 const mapDispatchToProps = dispatch => ({
   toggleObject(obj) {
     dispatch({
@@ -239,6 +248,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOWSELECT_CEDULA",
       showSelectCedula,
+    })
+  },
+  toggleSetGradient(setGradient) {
+    dispatch({
+      type: "TOGGLE_SET_GRADIENT",
+      setGradient,
+    })
+  },
+  toggleSetGradientClass(setGradientClass) {
+    dispatch({
+      type: "TOGGLE_SET_GRADIENT_CLASS",
+      setGradientClass,
     })
   },
 })

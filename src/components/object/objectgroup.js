@@ -23,10 +23,14 @@ const ObjectGroup = ({
   toggleShowSelectMasInfo,
   toggleShowSelectCedula,
   toggleShowControls,
+  toggleSetGradient,
+  toggleSetGradientClass,
 }) => {
   const _onHide = showGroup => {
     toggleShowControls(true)
     toggleShowGroup(!showGroup)
+    toggleSetGradient({})
+    toggleSetGradientClass("degradient")
   }
 
   const _showObject = obj => {
@@ -183,6 +187,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOWSELECT_CEDULA",
       showSelectCedula,
+    })
+  },
+  toggleSetGradient(setGradient) {
+    dispatch({
+      type: "TOGGLE_SET_GRADIENT",
+      setGradient,
+    })
+  },
+  toggleSetGradientClass(setGradientClass) {
+    dispatch({
+      type: "TOGGLE_SET_GRADIENT_CLASS",
+      setGradientClass,
     })
   },
 })

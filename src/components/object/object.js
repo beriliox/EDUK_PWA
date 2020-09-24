@@ -7,10 +7,19 @@ import ModalHeader from "./modal/header/modalheader"
 import ModalBody from "./modal/body/modalbody"
 import ModalFooter from "./modal/footer/modalfooter"
 
-const ObjectComponent = ({ object, show, toggleShow, toggleShowControls }) => {
+const ObjectComponent = ({
+  object,
+  show,
+  toggleShow,
+  toggleShowControls,
+  toggleSetGradient,
+  toggleSetGradientClass,
+}) => {
   const _onHide = show => {
     toggleShowControls(true)
     toggleShow(!show)
+    toggleSetGradient({})
+    toggleSetGradientClass("degradient")
   }
   return (
     <>
@@ -42,6 +51,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOW_CONTROLS",
       showControls,
+    })
+  },
+  toggleSetGradient(setGradient) {
+    dispatch({
+      type: "TOGGLE_SET_GRADIENT",
+      setGradient,
+    })
+  },
+  toggleSetGradientClass(setGradientClass) {
+    dispatch({
+      type: "TOGGLE_SET_GRADIENT_CLASS",
+      setGradientClass,
     })
   },
 })

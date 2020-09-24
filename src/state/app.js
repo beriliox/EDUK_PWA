@@ -17,6 +17,8 @@ const initialState = {
   showSelectVideo: "deselected",
   showSelect3D: "deselected",
   showSelectMasInfo: "deselected",
+  setGradient: {},
+  setGradientClass: "degradient",
 }
 
 export default (state = initialState, action) => {
@@ -110,6 +112,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showSelectMasInfo: action.showSelectMasInfo,
+      }
+    case "TOGGLE_SET_GRADIENT":
+      return {
+        ...state,
+        setGradient: action.setGradient,
+      }
+    case "TOGGLE_SET_GRADIENT_CLASS":
+      return {
+        ...state,
+        setGradientClass: action.setGradientClass,
       }
     default:
       return state

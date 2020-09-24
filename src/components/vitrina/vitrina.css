@@ -64,3 +64,11 @@ div[class*="modalHelpDialog"] .modal-content .modal-title {
 .modal-backdrop.fade {
   opacity: 0 !important;
 }
+
+.gradient {
+  opacity: 0.99 !important;
+}
+
+.degradient {
+  opacity: 1 !important;
+}
