@@ -1,4 +1,6 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import BackgroundImage from "gatsby-background-image"
 import { connect } from "react-redux"
 import vitrinaStyles from "./vitrina.module.scss"
 import "./vitrina.css"
@@ -23,6 +25,18 @@ const BackgroundCarousel = ({
   toggleShowSelectCedula,
   toggleShowControls,
 }) => {
+  const query = useStaticQuery(graphql`
+    query {
+      indexImage: file(relativePath: { eq: "images/gradient.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 1800) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
+
   const vitrina = props.vitrina
   const keyID = props.key
   const _showGroup = (group, key) => {
@@ -57,6 +71,8 @@ const BackgroundCarousel = ({
     console.log(x, y)
   }
 
+  console.log(query)
+
   const grupos = vitrina.relationships.node__grupo
     ? vitrina.relationships.node__grupo
     : []
@@ -73,47 +89,49 @@ const BackgroundCarousel = ({
             `,
       }}
     >
-      <svg width="800" height="1280">
-        {grupos.map(grupo => {
-          const objetoGroups = grupo.relationships.node__objeto
-            ? grupo.relationships.node__objeto
-            : []
-          const objetoGroupsLength = objetoGroups.length
-          return grupo.field_coords.map(coord => {
-            let cx = parseInt(coord.split(",")[0])
-            let cy = parseInt(coord.split(",")[1])
-            let cr = parseInt(coord.split(",")[2])
-              ? parseInt(coord.split(",")[2])
-              : 10
-            return objetoGroups.map((obj, k) => {
-              if (objetoGroupsLength === 1) {
-                return (
-                  <circle
-                    key={k}
-                    onClick={() => _showObject(obj, keyID)}
-                    cx={cx}
-                    cy={cy}
-                    r={cr}
-                    className={vitrinaStyles.circle}
-                  ></circle>
-                )
-              }
-              if (objetoGroupsLength > 1) {
-                return (
-                  <circle
-                    key={k}
-                    onClick={() => _showGroup(objetoGroups, keyID)}
-                    cx={cx}
-                    cy={cy}
-                    r={cr}
-                    className={vitrinaStyles.circle}
-                  ></circle>
-                )
-              }
+      <BackgroundImage>
+        <svg width="800" height="1280">
+          {grupos.map(grupo => {
+            const objetoGroups = grupo.relationships.node__objeto
+              ? grupo.relationships.node__objeto
+              : []
+            const objetoGroupsLength = objetoGroups.length
+            return grupo.field_coords.map(coord => {
+              let cx = parseInt(coord.split(",")[0])
+              let cy = parseInt(coord.split(",")[1])
+              let cr = parseInt(coord.split(",")[2])
+                ? parseInt(coord.split(",")[2])
+                : 10
+              return objetoGroups.map((obj, k) => {
+                if (objetoGroupsLength === 1) {
+                  return (
+                    <circle
+                      key={k}
+                      onClick={() => _showObject(obj, keyID)}
+                      cx={cx}
+                      cy={cy}
+                      r={cr}
+                      className={vitrinaStyles.circle}
+                    ></circle>
+                  )
+                }
+                if (objetoGroupsLength > 1) {
+                  return (
+                    <circle
+                      key={k}
+                      onClick={() => _showGroup(objetoGroups, keyID)}
+                      cx={cx}
+                      cy={cy}
+                      r={cr}
+                      className={vitrinaStyles.circle}
+                    ></circle>
+                  )
+                }
+              })
             })
-          })
-        })}
-      </svg>
+          })}
+        </svg>
+      </BackgroundImage>
     </div>
   )
 }

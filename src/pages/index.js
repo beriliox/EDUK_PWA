@@ -30,7 +30,7 @@ const IndexPage = () => {
         {
           <div className={indexStyles.blackOverlay}>
             <div className={indexStyles.contentBox}>
-              <h1>Bienvenido a la aplicación de EDUK DISEÑO</h1>
+              <h1>Bienvenido a la aplicación de Museo La Serena</h1>
               <h2 className={indexStyles.subtitlesH2}>
                 Seleccione una vitrina
               </h2>

@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `EDUK DISEÑO | MUSEOGRAFÍA DIDÁCTICA GRÁFICA`,
+    title: `MUSEO LA SERENA`,
     description: ``,
-    author: `@beriliox`,
+    author: `@eduk`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -26,8 +26,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `EDUK DISEÑO | MUSEOGRAFÍA DIDÁCTICA GRÁFICA`,
-        short_name: `EDUK DISEÑO`,
+        name: `MUSEO LA SERENA`,
+        short_name: `MUSEO LA SERENA`,
         start_url: `/`,
         background_color: `#AB7657`,
         theme_color: `#AB7657`,
