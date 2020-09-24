@@ -29,7 +29,7 @@ const VitrinaCarousel = ({
   }
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 1000 * 60 * 15,
+    timeout: 1000 * 60,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
