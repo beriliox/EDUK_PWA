@@ -49,6 +49,7 @@ const VitrinaCarousel = ({
       controls={showControls}
       activeIndex={index}
       onSelect={handleSelect}
+      wrap={false}
     >
       {vitrinas.map((vitrina, key) => {
         const vitrinaObj = { vitrina, key }
