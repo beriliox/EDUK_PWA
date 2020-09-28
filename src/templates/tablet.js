@@ -17,7 +17,7 @@ const Tablet = props => {
     : []
 
   return (
-    <Layout key={Math.round(Math.random())}>
+    <Layout>
       <SEO title="Tablet" />
       <VitrinaCarousel vitrinas={vitrinas} />
       <ObjectComponent object={object} />

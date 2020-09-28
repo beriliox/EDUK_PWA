@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Carousel, Modal } from "react-bootstrap"
 import { connect } from "react-redux"
 import { useIdleTimer } from "react-idle-timer"
@@ -13,6 +13,12 @@ const VitrinaCarousel = ({
   toggleShowHelp,
   showControls,
 }) => {
+  const [index, setIndex] = useState(0)
+
+  const handleSelect = (selectedIndex, e) => {
+    console.log(selectedIndex)
+    setIndex(selectedIndex)
+  }
   const handleOnIdle = event => {
     //console.log("user is idle", event)
     //console.log("last active", getLastActiveTime())
@@ -38,10 +44,11 @@ const VitrinaCarousel = ({
 
   return (
     <Carousel
-      key={Math.round(Math.random())}
       defaultActiveIndex={onSelect}
       interval={null}
       controls={showControls}
+      activeIndex={index}
+      onSelect={handleSelect}
     >
       {vitrinas.map((vitrina, key) => {
         const vitrinaObj = { vitrina, key }
