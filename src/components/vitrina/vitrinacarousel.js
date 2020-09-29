@@ -14,6 +14,7 @@ const VitrinaCarousel = ({
   showControls,
   toggleShow,
   toggleShowGroup,
+  toggleShowControls,
 }) => {
   const [index, setIndex] = useState(0)
 
@@ -23,6 +24,7 @@ const VitrinaCarousel = ({
   const handleOnIdle = event => {
     //console.log("user is idle", event)
     //console.log("last active", getLastActiveTime())
+    toggleShowControls(true)
     toggleShow(false)
     toggleShowGroup(false)
     toggleShowHelp(true)
@@ -38,7 +40,7 @@ const VitrinaCarousel = ({
   }
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 1000 * 60,
+    timeout: 1000 * 5,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
@@ -101,10 +103,16 @@ const mapDispatchToProps = dispatch => ({
       show,
     })
   },
-  toggleOnSelectGroup(onSelectGroup) {
+  toggleShowGroup(showGroup) {
     dispatch({
-      type: "TOGGLE_ONSELECT_GROUP",
-      onSelectGroup,
+      type: "TOGGLE_SHOW_OBJECT",
+      showGroup,
+    })
+  },
+  toggleShowControls(showControls) {
+    dispatch({
+      type: "TOGGLE_SHOW_CONTROLS",
+      showControls,
     })
   },
 })
