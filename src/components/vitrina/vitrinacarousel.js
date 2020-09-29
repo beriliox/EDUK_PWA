@@ -12,6 +12,8 @@ const VitrinaCarousel = ({
   onSelect,
   toggleShowHelp,
   showControls,
+  toggleShow,
+  toggleShowGroup,
 }) => {
   const [index, setIndex] = useState(0)
 
@@ -22,6 +24,8 @@ const VitrinaCarousel = ({
   const handleOnIdle = event => {
     //console.log("user is idle", event)
     //console.log("last active", getLastActiveTime())
+    toggleShow(false)
+    toggleShowGroup(false)
     toggleShowHelp(true)
   }
 
@@ -90,6 +94,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "TOGGLE_SHOWHELP",
       showHelp,
+    })
+  },
+  toggleShow(show) {
+    dispatch({
+      type: "TOGGLE_SHOW",
+      show,
+    })
+  },
+  toggleOnSelectGroup(onSelectGroup) {
+    dispatch({
+      type: "TOGGLE_ONSELECT_GROUP",
+      onSelectGroup,
     })
   },
 })
