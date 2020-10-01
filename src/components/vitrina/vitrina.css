@@ -50,11 +50,10 @@ div[class*="modalHelpDialog"] .modal-content .modal-title {
   height: 50px;
 }
 .carousel-indicators li {
-  margin: 1rem 0.5rem;
+  margin: 39px 0.5rem 0;
   border-radius: 50%;
-  width: 20px;
-  height: 1px;
-  background-clip: unset;
+  width: 15px;
+  height: 15px;
 }
 
 .modal-backdrop.show {
