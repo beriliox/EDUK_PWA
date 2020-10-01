@@ -9,7 +9,7 @@ div[class*="modalHelpDialog"] .modal-content {
 
 div[class*="modalHelpDialog"] .modal-content .close {
   right: 4px;
-  top: -7px;
+  top: -6px;
   color: white;
   text-shadow: none;
   font-weight: 300;

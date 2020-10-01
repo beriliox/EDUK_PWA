@@ -620,4 +620,5 @@ pre tt:after {
 }
 button.close span {
   line-height: 1rem;
+  text-shadow: none;
 }

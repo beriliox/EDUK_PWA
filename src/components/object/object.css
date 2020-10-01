@@ -1,6 +1,8 @@
 .modal-content .close {
   position: absolute;
   right: 1rem;
-  top: 1rem;
-  color: black;
+  top: 0.7rem;
+  color: #FFF;
+  filter: contrast(0);
+  opacity: 1;
 }
