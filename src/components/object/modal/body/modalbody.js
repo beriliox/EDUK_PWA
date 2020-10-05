@@ -15,6 +15,8 @@ const ModalBody = ({
 }) => {
   const _selectImage = (e, images) => {
     const currentImage = e.target.id
+    const sublings = Object.values(e.target.parentElement.children)
+
     images.forEach((img, key) => {
       if (currentImage === `imageObject-${key}`) {
         toggleShowDefaultImage(false)
@@ -25,6 +27,17 @@ const ModalBody = ({
         toggleShowBody(true)
       }
     })
+    if (
+      !e.target.getAttribute("active") ||
+      e.target.getAttribute("active") === "false"
+    ) {
+      e.target.setAttribute("active", "true")
+      sublings.forEach(sub => {
+        if (currentImage !== sub.id) {
+          sub.setAttribute("active", "false")
+        }
+      })
+    }
   }
 
   const objectImages = object ? object.relationships.field_imagen : []
