@@ -12,6 +12,9 @@
     margin: 0 5px;
     padding: 0;
   }
+  [active="false"] {
+    opacity: 0.6;
+  }
   .modalImagesBlock {
     display: flex;
     align-items: center;
