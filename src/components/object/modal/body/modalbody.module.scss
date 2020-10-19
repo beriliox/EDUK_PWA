@@ -20,5 +20,10 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    img {
+      &:not([active="true"]) {
+        opacity: 0.6;
+      }
+    }
   }
 }
