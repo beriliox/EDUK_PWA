@@ -22,7 +22,7 @@ const ModalFooter = ({ object }) => {
           <p className={modalFooterStyles.objectTitle}>{title}</p>
           <p>{material}</p>
           <p>{site}</p>
-          <p>{`${commune}, ${province}`}</p>
+          <p>{`${commune}`}</p>
           <p>{code}</p>
         </div>
       </div>
