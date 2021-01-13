@@ -5,12 +5,15 @@
   flex-wrap: wrap;
   border: 0;
   border-radius: 0;
-  padding: 1.5rem 0;
+  padding: 35px 0 50px;
   p {
     color: white;
     font-weight: 300;
     margin: 0;
     font-family: "Messina Sans", sans-serif;
+    font-size: 21px;
+    letter-spacing: 0.5px;
+    line-height: 130%;
   }
   .objectTitle {
     line-height: 55px;
@@ -18,6 +21,7 @@
     font-size: 50px;
     font-weight: bold;
     font-family: "Messina Sans", sans-serif;
+    letter-spacing: 0;
   }
   .objectInfoBlock {
     margin: 0;

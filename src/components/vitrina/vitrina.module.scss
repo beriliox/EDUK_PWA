@@ -21,21 +21,23 @@
   align-items: center;
   border-radius: 0;
   .HelpMessage {
-    margin-left: 0.5rem;
     display: flex;
     align-items: center;
+    letter-spacing: 0.5px;
   }
 }
 
 .modalHelpDialog {
   margin: 31rem auto;
-  max-width: 545px;
-  height: 115px;
+  max-width: 520px;
+  height: 110px;
 }
 
 .Icon {
-  width: 3rem !important;
-  height: auto !important;
+  width: auto !important;
+  height: 46.07px !important;
+  margin-top: -5px;
+  margin-right: 10px;
 }
 
 .ModalTitle {
