@@ -1,3 +1,6 @@
-[build.environment]
-  NODE_VERSION = "10.16.0"
-  NPM_VERSION = "6.9.0"  # Especifica la versión que necesitas de npm
+[build]
+  command = "yarn build"
+  publish = "public"
+  node_version = "10.16.0"
+  yarn_version = "1.22.19s"
+  environment = { NPM_VERSION = "6.9.0" }
