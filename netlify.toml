@@ -1,7 +1,6 @@
 [build]
   command = "yarn build"
   publish = "public"
-  node_version = "10.16.0"
+  node_version = "18"
   yarn_version = "1.22.19"
-  environment = { NPM_VERSION = "6.9.0" }
-  python_version = "3.10"
+  environment = { NPM_VERSION = "9.8.1" }  # opcional, si usas npm
