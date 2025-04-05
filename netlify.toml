@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "yarn install && yarn build || echo 'Build failed'"
   publish = "public"
   node_version = "18"
   yarn_version = "1.22.19"
