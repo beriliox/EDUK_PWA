@@ -1,6 +1,4 @@
 [build]
-  command = "yarn install && yarn build || echo 'Build failed'"
+  node_version = "10.16.0"
+  command = "PYTHON=python3 npm rebuild sharp && yarn install && yarn build"
   publish = "public"
-  node_version = "18"
-  yarn_version = "1.22.19"
-  environment = { NPM_VERSION = "9.8.1" }  # opcional, si usas npm
