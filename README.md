@@ -97,3 +97,9 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
 
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+## 💫 Stack versions
+- node: 10.16.0
+- npm: 6.9.0
+- gatsby: 2.12.117
+- yarn: 1.22.19
