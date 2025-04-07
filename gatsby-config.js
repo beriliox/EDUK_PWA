@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/EDUK_PWA",
   siteMetadata: {
     title: `MUSEO LA SERENA`,
     description: ``,
@@ -30,7 +31,7 @@ module.exports = {
       options: {
         name: `MUSEO LA SERENA`,
         short_name: `MUSEO LA SERENA`,
-        start_url: `/`,
+        start_url: `/EDUK_PWA/`,
         background_color: `#AB7657`,
         theme_color: `#AB7657`,
         display: `fullscreen`,
